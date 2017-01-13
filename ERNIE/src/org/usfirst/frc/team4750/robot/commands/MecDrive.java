@@ -3,15 +3,24 @@ package org.usfirst.frc.team4750.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 
 import org.usfirst.frc.team4750.robot.Robot;
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.RobotDrive;
 
 /**
  *
  */
-public class ExampleCommand extends Command {
-	public ExampleCommand() {
-		// Use requires() here to declare subsystem dependencies
-		requires(Robot.exampleSubsystem);
+public class MecDrive extends Command {
+	public MecDrive() {
+		//creates robot drive object using PWN 1,2,3,4
+		RobotDrive m_robotDrive = new RobotDrive(1,2,3,4);
+		
+		//creates joystick being used in USB port 1 on the Drive Station
+		Joystick m_driveStick = new Joystick(1);
+		
+		m_robotDrive.mecanumDrive_Cartesian(m_driveStick.getX(), m_driveStick.getY(), m_driveStick.getZ(), 0);
 	}
+	
 
 	// Called just before this Command runs the first time
 	@Override
