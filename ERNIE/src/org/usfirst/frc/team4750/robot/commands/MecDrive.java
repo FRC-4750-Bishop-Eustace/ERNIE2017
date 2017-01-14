@@ -11,20 +11,24 @@ import edu.wpi.first.wpilibj.RobotDrive;
  *
  */
 public class MecDrive extends Command {
-	public MecDrive() {
-		//creates robot drive object using PWN 1,2,3,4
-		RobotDrive m_robotDrive = new RobotDrive(1,2,3,4);
-		
-		//creates joystick being used in USB port 1 on the Drive Station
-		Joystick m_driveStick = new Joystick(1);
-		
-		m_robotDrive.mecanumDrive_Cartesian(m_driveStick.getX(), m_driveStick.getY(), m_driveStick.getZ(), 0);
+	double leftSpeed, rightSpeed;
+	RobotDrive m_robotDrive = new RobotDrive(0,1,2,3);
+	Joystick m_driveStick = new Joystick(1);
+	
+	public MecDrive(double leftSpeed, double rightSpeed) {
+		requires(Robot.driveTrain);
+		this.leftSpeed = leftSpeed;
+		this.rightSpeed = rightSpeed;
 	}
 	
 
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
+		Robot.driveTrain.setLeftDriveMotor(leftSpeed);
+		Robot.driveTrain.setRightDriveMotor(rightSpeed);
+		m_robotDrive.mecanumDrive_Cartesian(m_driveStick.getX(), m_driveStick.getY(), m_driveStick.getZ(), 0);
+		
 	}
 
 	// Called repeatedly when this Command is scheduled to run
