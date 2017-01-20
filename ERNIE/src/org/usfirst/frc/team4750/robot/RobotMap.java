@@ -8,8 +8,10 @@ package org.usfirst.frc.team4750.robot;
  */
 public class RobotMap {
 	
-	//Motor PWM ports
+	//USB Ports
 	public static int DRIVE_STICK_USB_PORT = 0;
+	
+	//PWM Motor Ports
 	public static final int FRONT_LEFT_MOTOR = 1;
 	public static final int BACK_LEFT_MOTOR = 2;
 	public static final int FRONT_RIGHT_MOTOR = 3;
