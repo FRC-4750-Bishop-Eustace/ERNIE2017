@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 //import org.usfirst.frc.team4750.robot.commands.ExampleCommand;
 import org.usfirst.frc.team4750.robot.commands.MecDrive;
 import org.usfirst.frc.team4750.robot.subsystems.DriveTrain;
-import org.usfirst.frc.team4750.robot.subsystems.Shooter;
 //import org.usfirst.frc.team4750.robot.subsystems.ExampleSubsystem;
 
 /**
@@ -22,17 +21,16 @@ import org.usfirst.frc.team4750.robot.subsystems.Shooter;
  * directory.
  */
 public class Robot extends IterativeRobot {
+	//TESTING...
 
 	//public static final MecDrive MecDrive = new MecDrive(0, 0);
 	//public static final MecDrive MecDrive = new MecDrive();
 	public static final DriveTrain driveTrain = new DriveTrain();
-	public static final Shooter shooter = new Shooter();
 	
 	//public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static OI oi;
 
 	Command autonomousCommand;
-	SendableChooser<Command> chooser = new SendableChooser<>();
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -43,7 +41,6 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
 		//chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
-		SmartDashboard.putData("Auto mode", chooser);
 	}
 
 	/**
@@ -74,7 +71,6 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		autonomousCommand = chooser.getSelected();
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
