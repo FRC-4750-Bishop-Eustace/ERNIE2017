@@ -1,14 +1,8 @@
 package org.usfirst.frc.team4750.robot;
 
-import org.usfirst.frc.team4750.robot.commands.SetShooterSpeed;
-import org.usfirst.frc.team4750.robot.commands.Shooting;
-
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.buttons.Button;
-import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import edu.wpi.first.wpilibj.command.Command;
 
-//import org.usfirst.frc.team4750.robot.commands.ExampleCommand;
+
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -19,10 +13,10 @@ public class OI {
 	//Joystick shootStick = new Joystick(RobotMap.SHOOTER_JOYSTICK_USB_PORT);
 	
 	//Joystick buttons
-	Button shootButton = new JoystickButton(driveStick, 1);
+	
 	
 	public OI(){
-		shootButton.toggleWhenPressed(new SetShooterSpeed());
+		
 	}
 	//commands with buttons
 	
