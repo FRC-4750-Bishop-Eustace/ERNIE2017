@@ -8,7 +8,7 @@ import org.usfirst.frc.team4750.robot.commands.MecDrive;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
-import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.VictorSP;
 
 /**
  *
@@ -17,10 +17,10 @@ public class DriveTrain extends Subsystem {
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
 	
-	Victor f_rightMotor = new Victor(RobotMap.FRONT_RIGHT_MOTOR);
-	Victor f_leftMotor = new Victor(RobotMap.FRONT_LEFT_MOTOR);
-	Victor b_rightMotor = new Victor(RobotMap.BACK_RIGHT_MOTOR);
-	Victor b_leftMotor = new Victor(RobotMap.BACK_LEFT_MOTOR);
+	VictorSP f_rightMotor = new VictorSP(RobotMap.FRONT_RIGHT_MOTOR);
+	VictorSP f_leftMotor = new VictorSP(RobotMap.FRONT_LEFT_MOTOR);
+	VictorSP b_rightMotor = new VictorSP(RobotMap.BACK_RIGHT_MOTOR);
+	VictorSP b_leftMotor = new VictorSP(RobotMap.BACK_LEFT_MOTOR);
 
 	
 	// put this line back and it stops uploading properly.. Don't know why it's a problem...
