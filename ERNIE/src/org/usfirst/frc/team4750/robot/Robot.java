@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team4750.robot.commands.MecDrive;
 import org.usfirst.frc.team4750.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team4750.robot.subsystems.Intake;
-import org.usfirst.frc.team4750.robot.subsystems.Shooter;
+//import org.usfirst.frc.team4750.robot.subsystems.Shooter;
 //import org.usfirst.frc.team4750.robot.subsystems.ExampleSubsystem;
 
 /**
@@ -27,7 +27,7 @@ public class Robot extends IterativeRobot {
 	//public static final MecDrive MecDrive = new MecDrive(0, 0);
 	//public static final MecDrive MecDrive = new MecDrive();
 	public static final DriveTrain driveTrain = new DriveTrain();
-	public static final Shooter shooter = new Shooter();
+	//public static final Shooter shooter = new Shooter();
 	public static final Intake intake = new Intake();
 	//public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static OI oi;

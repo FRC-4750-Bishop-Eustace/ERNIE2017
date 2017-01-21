@@ -16,7 +16,7 @@ public class Intake extends Subsystem {
 	}
 	
 	public void setIntakeSpeed(double speed){
-		intake.set(.5*speed);
+		intake.set(.25*speed);
 	}
 
 }
