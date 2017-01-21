@@ -1,35 +1,40 @@
 package org.usfirst.frc.team4750.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team4750.robot.Robot;
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.Victor;
-import edu.wpi.first.wpilibj.RobotDrive;
+import org.usfirst.frc.team4750.robot.RobotMap;
 
 /**
  *
  */
 public class MecDrive extends Command {
+	
+	double leftSpeed, rightSpeed;
 	public MecDrive() {
-		//creates robot drive object using PWN 1,2,3,4
-		RobotDrive m_robotDrive = new RobotDrive(1,2,3,4);
+		requires(Robot.driveTrain);
+		//this.leftSpeed = leftSpeed;
+		//this.rightSpeed = rightSpeed;
 		
-		//creates joystick being used in USB port 1 on the Drive Station
-		Joystick m_driveStick = new Joystick(1);
-		
-		m_robotDrive.mecanumDrive_Cartesian(m_driveStick.getX(), m_driveStick.getY(), m_driveStick.getZ(), 0);
 	}
 	
 
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
+		/*
+		Robot.driveTrain.setLeftDriveMotor(leftSpeed);
+		Robot.driveTrain.setRightDriveMotor(rightSpeed);
+		*/
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
+		SmartDashboard.putBoolean("Is MechDrive executing?", true);
+		Robot.driveTrain.controllerDrive(Robot.oi.driveStick);
+		
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
