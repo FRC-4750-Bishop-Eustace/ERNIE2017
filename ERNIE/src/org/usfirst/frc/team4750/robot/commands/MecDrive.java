@@ -28,4 +28,10 @@ public class MecDrive extends Command {
 		Robot.driveTrain.setDriveMotors(0);
 	}
 
+	@Override
+	protected void interrupted() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
