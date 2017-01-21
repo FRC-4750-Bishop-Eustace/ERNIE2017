@@ -10,12 +10,12 @@ import org.usfirst.frc.team4750.robot.RobotMap;
  *
  */
 public class MecDrive extends Command {
-	double leftSpeed, rightSpeed;
 	
+	double leftSpeed, rightSpeed;
 	public MecDrive() {
 		requires(Robot.driveTrain);
-		//this.leftSpeed = 0;
-		//this.rightSpeed = 0;
+		//this.leftSpeed = leftSpeed;
+		//this.rightSpeed = rightSpeed;
 		
 	}
 	
