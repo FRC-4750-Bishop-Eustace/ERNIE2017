@@ -1,8 +1,6 @@
 package org.usfirst.frc.team4750.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-
-import org.usfirst.frc.team4750.robot.Robot;
 import org.usfirst.frc.team4750.robot.RobotMap;
 import org.usfirst.frc.team4750.robot.commands.MecDrive;
 
@@ -28,7 +26,7 @@ public class DriveTrain extends Subsystem {
 	
 	
 	public void controllerDrive(Joystick i) {
-		m_robotDrive.mecanumDrive_Cartesian(i.getRawAxis(0), i.getRawAxis(1), i.getRawAxis(3), 0);
+		m_robotDrive.mecanumDrive_Cartesian(i.getRawAxis(0), -i.getRawAxis(3), -i.getRawAxis(1), 0);
 	}
 
 	public void initDefaultCommand() {
