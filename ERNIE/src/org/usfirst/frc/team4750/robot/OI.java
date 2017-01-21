@@ -11,6 +11,10 @@ import edu.wpi.first.wpilibj.buttons.Button;
  */
 public class OI {
 	public Joystick driveStick = new Joystick(RobotMap.DRIVE_STICK_USB_PORT);
+
+	public OI(){
+		
+	}
 	//Joystick shootStick = new Joystick(RobotMap.SHOOTER_JOYSTICK_USB_PORT);
 	
 	//// CREATING BUTTONS

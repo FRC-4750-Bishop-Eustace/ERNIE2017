@@ -10,13 +10,13 @@ import org.usfirst.frc.team4750.robot.RobotMap;
 /**
  *
  */
-public class MecDriveAuto extends Command {
+public class MoveForward extends Command {
 	
 	Timer timer = new Timer();
 	double leftSpeed, rightSpeed;
 	double driveTime;
 	
-	public MecDriveAuto(double leftSpeed, double rightSpeed, double driveTime) {
+	public MoveForward(double leftSpeed, double rightSpeed, double driveTime) {
 		requires(Robot.driveTrain);
 		this.leftSpeed = leftSpeed;
 		this.rightSpeed = rightSpeed;
@@ -48,16 +48,15 @@ public class MecDriveAuto extends Command {
 	protected boolean isFinished() {
 		if(timer.get() > driveTime){
 			return true;
-		}else{
+		} else {
 			return false;
 		}
-		
-		
 	}
 
 	// Called once after isFinished returns true
 	@Override
 	protected void end() {
+		Robot.driveTrain.setDriveMotors(0);
 	}
 
 	// Called when another command which requires one or more of the same

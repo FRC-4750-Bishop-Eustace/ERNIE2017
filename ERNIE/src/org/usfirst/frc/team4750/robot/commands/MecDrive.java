@@ -10,6 +10,10 @@ public class MecDrive extends Command {
 		requires(Robot.driveTrain);
 	}
 	
+	protected void initialize(){
+		
+	}
+	
 	protected void execute(){
 		Robot.driveTrain.controllerDrive(Robot.oi.driveStick);
 	}

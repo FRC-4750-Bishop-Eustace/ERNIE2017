@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team4750.robot.commands.DriveForwardAndTurn;
 //import org.usfirst.frc.team4750.robot.commands.ExampleCommand;
 import org.usfirst.frc.team4750.robot.commands.MecDrive;
+import org.usfirst.frc.team4750.robot.commands.MoveForward;
 import org.usfirst.frc.team4750.robot.subsystems.DriveTrain;
 //import org.usfirst.frc.team4750.robot.subsystems.ExampleSubsystem;
 
@@ -33,7 +34,7 @@ public class Robot extends IterativeRobot {
 	AutoMode autoMode;
 	
 	Command autonomousCommand;
-	SendableChooser<Command> chooser = new SendableChooser<>();
+	//SendableChooser<Command> chooser = new SendableChooser<>();
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -44,14 +45,20 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
 		//chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
-		SmartDashboard.putData("Auto mode", chooser);
+		//SmartDashboard.putData("Auto mode", chooser);
 		
 		autoMode = AutoMode.MOVE_FORWARD;
 		
+		// (left speed, right speed, time)
 		switch(autoMode){
-		case MOVE_FORWARD:
-			autonomousCommand = new DriveForwardAndTurn(+1, RobotMap.REACH_TIME);
-			break;
+			case MOVE_FORWARD:
+				autonomousCommand = new MoveForward(+1.0, 1.0, RobotMap.REACH_TIME);
+				break;
+				
+		// (driveSpeed, driveTime, turnSpeed, turnTime)
+			case DRIVE_FORWARD_AND_TURN:
+				autonomousCommand = new DriveForwardAndTurn(+1, RobotMap.REACH_TIME, +1, RobotMap.TURN_TIME);
+				break;
 		}
 	}
 
@@ -83,7 +90,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		autonomousCommand = chooser.getSelected();
+		//autonomousCommand = chooser.getSelected();
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
