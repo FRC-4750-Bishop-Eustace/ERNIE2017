@@ -11,11 +11,11 @@ import org.usfirst.frc.team4750.robot.RobotMap;
  */
 public class MecDrive extends Command {
 	
-	
+	double leftSpeed, rightSpeed;
 	public MecDrive() {
 		requires(Robot.driveTrain);
-		//this.leftSpeed = 0;
-		//this.rightSpeed = 0;
+		//this.leftSpeed = leftSpeed;
+		//this.rightSpeed = rightSpeed;
 		
 	}
 	
@@ -46,7 +46,6 @@ public class MecDrive extends Command {
 	// Called once after isFinished returns true
 	@Override
 	protected void end() {
-		Robot.driveTrain.setDriveMotors(0);
 	}
 
 	// Called when another command which requires one or more of the same
