@@ -1,12 +1,11 @@
 package org.usfirst.frc.team4750.robot;
 
 import org.usfirst.frc.team4750.robot.commands.SetShooterSpeed;
-import org.usfirst.frc.team4750.robot.commands.Shooting;
+//import org.usfirst.frc.team4750.robot.commands.Shooting;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import edu.wpi.first.wpilibj.command.Command;
 
 //import org.usfirst.frc.team4750.robot.commands.ExampleCommand;
 

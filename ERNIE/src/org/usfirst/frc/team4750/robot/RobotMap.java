@@ -9,7 +9,6 @@ package org.usfirst.frc.team4750.robot;
 public class RobotMap {
 	//Joystick ports(USB) Check the driver station
 	public static int DRIVE_STICK_USB_PORT = 0;
-	public static int SHOOTER_STICK_USB_PORT = 1;
 	
 	
 	//Motor ports(PWM) 
@@ -19,7 +18,7 @@ public class RobotMap {
 	public static final int BACK_RIGHT_MOTOR = 4;
 	public static final int SHOOTER_MOTOR = 5; //subject to change
 	
-	//Joystick buttons
+	//Motor Speeds
 	public static final int SHOOTER_MOTOR_SPEED = 1;
 	
 	// For example to map the left and right motors, you could define the
