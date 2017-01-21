@@ -4,6 +4,7 @@ import org.usfirst.frc.team4750.robot.Robot;
 import org.usfirst.frc.team4750.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
+import org.usfirst.frc.team4750.robot.subsystems.Intake;
 
 public class SetIntakeSpeed extends Command {
 
