@@ -28,7 +28,7 @@ public class DriveTrain extends Subsystem {
 	
 	
 	public void controllerDrive(Joystick i) {
-		m_robotDrive.mecanumDrive_Cartesian(i.getRawAxis(0), i.getRawAxis(1), i.getRawAxis(3), 0);
+		m_robotDrive.mecanumDrive_Cartesian(i.getRawAxis(3), -i.getRawAxis(1), -i.getRawAxis(0), 0);
 	}
 
 	public void initDefaultCommand() {
