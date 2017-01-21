@@ -10,13 +10,13 @@ import org.usfirst.frc.team4750.robot.RobotMap;
 /**
  *
  */
-public class MoveForward extends Command {
+public class AutoMove extends Command {
 	
 	Timer timer = new Timer();
 	double leftSpeed, rightSpeed;
 	double driveTime;
 	
-	public MoveForward(double leftSpeed, double rightSpeed, double driveTime) {
+	public AutoMove(double leftSpeed, double rightSpeed, double driveTime) {
 		requires(Robot.driveTrain);
 		this.leftSpeed = leftSpeed;
 		this.rightSpeed = rightSpeed;

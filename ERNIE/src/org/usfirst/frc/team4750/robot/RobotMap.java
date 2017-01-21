@@ -19,7 +19,7 @@ public class RobotMap {
 	
 	//Timers
 	public static final double REACH_TIME = 1;
-	public static final double TURN_TIME = 0;
+	public static final double TURN_TIME = 1;
 	
 	// For example to map the left and right motors, you could define the
 	// following variables to use with your drivetrain subsystem.
