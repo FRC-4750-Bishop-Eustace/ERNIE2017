@@ -26,7 +26,7 @@ public class OI {
 	
 	public OI(){
 		//shootButton.toggleWhenPressed(new SetShooterSpeed());
-		shootButton.toggleWhenPressed(new SetIntakeSpeed());
+		intakeButton.toggleWhenPressed(new SetIntakeSpeed());
 	}
 	//commands with buttons
 	
