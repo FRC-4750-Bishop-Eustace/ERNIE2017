@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj.RobotDrive.MotorType;
 public class RobotMap {
 	//Joystick ports(USB) Check the driver station
 	public static int DRIVE_STICK_USB_PORT = 0;
-	public static int SHOOTER_STICK_USB_PORT = 1;
 	
 	
 	//Motor ports(PWM) 

@@ -1,5 +1,6 @@
 package org.usfirst.frc.team4750.robot.subsystems;
 
+import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 import org.usfirst.frc.team4750.robot.RobotMap;
@@ -61,6 +62,5 @@ public class DriveTrain extends Subsystem {
 	}*/
 	
 	public void stop(){
-		m_robotDrive.drive(0, 0);
 	}
 }
