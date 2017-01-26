@@ -16,7 +16,7 @@ public class RobotMap {
 	public static final int BACK_LEFT_MOTOR = 2;
 	public static final int FRONT_RIGHT_MOTOR = 3;
 	public static final int BACK_RIGHT_MOTOR = 4;
-	public static final int SHOOTER_MOTOR = 5; //subject to change
+	public static final int SHOOTER_MOTOR = 7; //subject to change
 	
 	//Motor Speeds
 	public static final int SHOOTER_MOTOR_SPEED = 1;
