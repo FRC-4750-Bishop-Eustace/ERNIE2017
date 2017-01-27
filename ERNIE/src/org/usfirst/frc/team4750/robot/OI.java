@@ -18,14 +18,11 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class OI {
 	public Joystick driveStick = new Joystick(RobotMap.DRIVE_STICK_USB_PORT);
-	//Joystick shootStick = new Joystick(RobotMap.SHOOTER_JOYSTICK_USB_PORT);
 	
 	//Joystick buttons
-	Button shootButton = new JoystickButton(driveStick, 1);
 	Button intakeButton = new JoystickButton(driveStick, 2);
 	
 	public OI(){
-		//shootButton.toggleWhenPressed(new SetShooterSpeed());
 		intakeButton.toggleWhenPressed(new SetIntakeSpeed());
 	}
 	//commands with buttons
