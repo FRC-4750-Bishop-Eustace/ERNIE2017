@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
-import org.usfirst.frc.team4750.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team4750.robot.subsystems.TestMotor;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -22,7 +22,7 @@ public class Robot extends IterativeRobot {
 
 	//public static final MecDrive MecDrive = new MecDrive(0, 0);
 	//public static final MecDrive MecDrive = new MecDrive();
-	public static final DriveTrain driveTrain = new DriveTrain();
+	public static final TestMotor testMotor = new TestMotor();
 	
 	//public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static OI oi;

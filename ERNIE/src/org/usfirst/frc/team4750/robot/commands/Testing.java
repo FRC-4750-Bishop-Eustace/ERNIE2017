@@ -5,16 +5,16 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team4750.robot.Robot;
 import org.usfirst.frc.team4750.robot.RobotMap;
-import org.usfirst.frc.team4750.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team4750.robot.subsystems.TestMotor;
 
 /**
  *
  */
-public class MecDrive extends Command {
+public class Testing extends Command {
 	
 	double leftSpeed, rightSpeed;
-	public MecDrive() {
-		requires(Robot.driveTrain);
+	public Testing() {
+		requires(Robot.testMotor);
 		//this.leftSpeed = leftSpeed;
 		//this.rightSpeed = rightSpeed;
 		
@@ -34,7 +34,7 @@ public class MecDrive extends Command {
 	@Override
 	protected void execute() {
 		SmartDashboard.putBoolean("Is MechDrive executing?", true);
-		Robot.driveTrain.controllerDrive(Robot.oi.driveStick);
+		Robot.testMotor.controllerDrive(Robot.oi.driveStick);
 		
 	}
 
