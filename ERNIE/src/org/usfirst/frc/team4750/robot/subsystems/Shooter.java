@@ -1,6 +1,5 @@
 package org.usfirst.frc.team4750.robot.subsystems;
 
-import org.usfirst.frc.team4750.robot.Robot;
 import org.usfirst.frc.team4750.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -17,9 +16,9 @@ public class Shooter extends Subsystem {
 
 	}
 	
-	public void setShooterSpeed(int speed){
+	public void setShooterSpeed(double speed){
 	SmartDashboard.putBoolean("is Shooter running", true);
-	
+		
 	shooterMotor.set(speed);
 	}
 

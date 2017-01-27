@@ -21,7 +21,7 @@ public class OI {
 	Button shootButton = new JoystickButton(driveStick, 1);
 	
 	public OI(){
-		shootButton.toggleWhenPressed(new SetShooterSpeed());
+		shootButton.whileHeld(new SetShooterSpeed());
 	}
 	//commands with buttons
 	
