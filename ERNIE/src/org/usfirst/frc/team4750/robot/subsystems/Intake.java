@@ -18,6 +18,8 @@ public class Intake extends Subsystem {
 
 	public void setIntakeSpeed(double intakeMotorSpeed) {
 		// TODO Auto-generated method stub
+		
+		intakeMotor.set(intakeMotorSpeed);
 	}
 
 }

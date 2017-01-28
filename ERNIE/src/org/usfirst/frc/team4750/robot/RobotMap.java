@@ -22,7 +22,7 @@ public class RobotMap {
 	
 	//Motor speed
 	public static final int SHOOTER_MOTOR_SPEED = 1;
-	public static final double INTAKE_MOTOR_SPEED = .25;
+	public static final double INTAKE_MOTOR_SPEED = .5;
 	
 	
 	// For example to map the left and right motors, you could define the
