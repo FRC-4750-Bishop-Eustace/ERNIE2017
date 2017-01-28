@@ -1,5 +1,6 @@
 package org.usfirst.frc.team4750.robot;
 
+import org.usfirst.frc.team4750.robot.commands.SetIntakeSpeed;
 import org.usfirst.frc.team4750.robot.commands.SetShooterSpeed;
 //import org.usfirst.frc.team4750.robot.commands.Shooting;
 
@@ -19,9 +20,12 @@ public class OI {
 	
 	//Joystick buttons
 	Button shootButton = new JoystickButton(driveStick, 1);
+	Button intakeButton = new JoystickButton(driveStick, 2);
 	
 	public OI(){
 		shootButton.whileHeld(new SetShooterSpeed());
+		intakeButton.toggleWhenPressed(new SetIntakeSpeed());
+		
 	}
 	//commands with buttons
 	
