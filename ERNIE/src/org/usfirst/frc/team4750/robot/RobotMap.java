@@ -19,14 +19,15 @@ public class RobotMap {
 	public static final int BACK_RIGHT_MOTOR = 4;
 	public static final int INTAKE_MOTOR = 5;
 	public static final int SHOOTER_MOTOR = 6;
+	public static final int AGITATOR_MOTOR = 7;
 	
 	
 	//Motor Speeds
 	public static final double SHOOTER_MOTOR_SPEED = 1;
 	public static final double INTAKE_MOTOR_SPEED = -.5;
 	public static final double LIFTER_MOTOR_SPEED = .2;
+	public static final double AGITATOR_MOTOR_SPEED = .4;
 
-	
 	// For example to map the left and right motors, you could define the
 	// following variables to use with your drivetrain subsystem.
 	// public static int leftMotor = 1;
