@@ -1,7 +1,5 @@
 package org.usfirst.frc.team4750.robot;
 
-import edu.wpi.first.wpilibj.RobotDrive.MotorType;
-
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
@@ -14,8 +12,14 @@ public class RobotMap {
 	
 	
 	//Motor ports(PWM) 
-	public static final int TEST_MOTOR = 1;
+	public static final int FRONT_LEFT_MOTOR = 1;
+	public static final int BACK_LEFT_MOTOR = 2;
+	public static final int FRONT_RIGHT_MOTOR = 3;
+	public static final int BACK_RIGHT_MOTOR = 4;
+	public static final int SHOOTER_MOTOR = 7; //subject to change
 	
+	//Motor Speeds
+	public static final double SHOOTER_MOTOR_SPEED = 1;
 	
 	// For example to map the left and right motors, you could define the
 	// following variables to use with your drivetrain subsystem.

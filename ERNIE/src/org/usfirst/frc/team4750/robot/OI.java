@@ -1,5 +1,7 @@
 package org.usfirst.frc.team4750.robot;
 
+import org.usfirst.frc.team4750.robot.commands.SetShooterSpeed;
+//import org.usfirst.frc.team4750.robot.commands.Shooting;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -16,11 +18,13 @@ public class OI {
 	//Joystick shootStick = new Joystick(RobotMap.SHOOTER_JOYSTICK_USB_PORT);
 	
 	//Joystick buttons
-	
+	Button shootButton = new JoystickButton(driveStick, 1);
 	
 	public OI(){
+		shootButton.whileHeld(new SetShooterSpeed());
 	}
 	//commands with buttons
+	
 	
 	//// CREATING BUTTONS
 	// One type of button is a joystick button which is any button on a
