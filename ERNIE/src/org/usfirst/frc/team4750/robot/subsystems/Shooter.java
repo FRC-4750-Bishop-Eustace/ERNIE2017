@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Shooter extends Subsystem {
 
+	// defines motor
 	VictorSP shooterMotor = new VictorSP(RobotMap.SHOOTER_MOTOR);
 	
 	@Override
@@ -17,8 +18,10 @@ public class Shooter extends Subsystem {
 	}
 	
 	public void setShooterSpeed(double speed){
+	//for debugging
 	SmartDashboard.putBoolean("is Shooter running", true);
-		
+	
+	// set the speed to a placeholder
 	shooterMotor.set(speed);
 	}
 

@@ -12,6 +12,7 @@ import org.usfirst.frc.team4750.robot.subsystems.Agitator;
 //import org.usfirst.frc.team4750.robot.commands.ExampleCommand;
 import org.usfirst.frc.team4750.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team4750.robot.subsystems.Intake;
+import org.usfirst.frc.team4750.robot.subsystems.Lifter;
 import org.usfirst.frc.team4750.robot.subsystems.Shooter;
 //import org.usfirst.frc.team4750.robot.subsystems.ExampleSubsystem;
 
@@ -24,12 +25,12 @@ import org.usfirst.frc.team4750.robot.subsystems.Shooter;
  */
 public class Robot extends IterativeRobot {
 
-	//public static final MecDrive MecDrive = new MecDrive(0, 0);
-	//public static final MecDrive MecDrive = new MecDrive();
+	//this defines the subsystems so they can be called along with their subclasses
 	public static final DriveTrain driveTrain = new DriveTrain();
 	public static final Shooter shooter = new Shooter();
 	public static final Intake intake = new Intake();
 	public static final Agitator agitator = new Agitator();
+	public static final Lifter lifter = new Lifter();
 	
 	//public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static OI oi;
@@ -106,8 +107,8 @@ public class Robot extends IterativeRobot {
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
 		if (autonomousCommand != null)autonomousCommand.cancel();
-		
-		Robot.agitator.setAgitatorSpeed(RobotMap.AGITATOR_MOTOR_SPEED);
+		// this makes it so the agitator starts running when the robot comes on
+		Robot.agitator.setAgitatorSpeed();
 	}
 
 	/**

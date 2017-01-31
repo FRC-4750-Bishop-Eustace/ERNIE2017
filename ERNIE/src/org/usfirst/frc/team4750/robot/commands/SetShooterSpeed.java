@@ -9,7 +9,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class SetShooterSpeed extends Command {
 
 	protected void execute(){
+		// sets the shooter speed as per RobotMap
 		Robot.shooter.setShooterSpeed(RobotMap.SHOOTER_MOTOR_SPEED);
+		// used for debugging
 		SmartDashboard.putBoolean("is SetShooterSpeed running?" , true);
 	}
 	
@@ -20,6 +22,7 @@ public class SetShooterSpeed extends Command {
 	}
 	
 	protected void end(){
+		// so it stops when it is over
 		Robot.shooter.setShooterSpeed(0);
 	}
 

@@ -10,29 +10,18 @@ import org.usfirst.frc.team4750.robot.RobotMap;
  *
  */
 public class MecDrive extends Command {
-	double leftSpeed, rightSpeed;
 	
 	public MecDrive() {
-		requires(Robot.driveTrain);
-		//this.leftSpeed = 0;
-		//this.rightSpeed = 0;
-		
-	}
-	
-
-	// Called just before this Command runs the first time
-	@Override
-	protected void initialize() {
-		/*
-		Robot.driveTrain.setLeftDriveMotor(leftSpeed);
-		Robot.driveTrain.setRightDriveMotor(rightSpeed);
-		*/
+		//this makes it so all the required pieces come here.
+		requires(Robot.driveTrain);		
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
+		//this can used to test to see if a command is running for debugging
 		SmartDashboard.putBoolean("Is MechDrive executing?", true);
+		//this says that the robot's drivetrain is controlled by the driveStick defined in oi class
 		Robot.driveTrain.controllerDrive(Robot.oi.driveStick);
 		
 	}
@@ -48,9 +37,4 @@ public class MecDrive extends Command {
 	protected void end() {
 	}
 
-	// Called when another command which requires one or more of the same
-	// subsystems is scheduled to run
-	@Override
-	protected void interrupted() {
-	}
 }
