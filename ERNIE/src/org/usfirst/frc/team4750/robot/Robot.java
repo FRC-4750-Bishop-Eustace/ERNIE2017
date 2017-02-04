@@ -1,4 +1,3 @@
-
 package org.usfirst.frc.team4750.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -35,13 +34,33 @@ public class Robot extends IterativeRobot {
 	
 	Command autonomousCommand;
 	//SendableChooser<Command> chooser = new SendableChooser<>();
-
+	
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
 	 */
 	@Override
 	public void robotInit() {
+		SmartDashboard.putBoolean("Robot.robotInit()",true);
+		
+		SmartDashboard.putBoolean("Robot.autonomousInit()",false);
+		SmartDashboard.putBoolean("Robot.autonomousPeriodic()",false);
+		SmartDashboard.putBoolean("AutoDriveForwardAndTurn.AutoDriveForwardAndTurn()",false);
+		SmartDashboard.putBoolean("AutoMove.AutoMove()",false);
+		SmartDashboard.putBoolean("AutoMove.initialize()",false);
+		SmartDashboard.putBoolean("AutoMove.execute()",false);
+		SmartDashboard.putBoolean("AutoMove.isFinished()",false);
+		SmartDashboard.putBoolean("AutoMove.end()",false);
+		SmartDashboard.putBoolean("AutoMove.interrupted()",false);
+		SmartDashboard.putBoolean("MecDrive.MecDrive()",false);
+		SmartDashboard.putBoolean("MecDrive.initialize()",false);
+		SmartDashboard.putBoolean("MecDrive.execute()",false);
+		SmartDashboard.putBoolean("MecDrive.isFinished()",false);
+		SmartDashboard.putBoolean("MecDrive.end()",false);
+		SmartDashboard.putBoolean("MecDrive.interrupted()",false);
+		
+		
+		
 		oi = new OI();
 		//chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
@@ -59,6 +78,7 @@ public class Robot extends IterativeRobot {
 			case DRIVE_FORWARD_AND_TURN:
 				autonomousCommand = new AutoDriveForwardAndTurn(+1, RobotMap.REACH_TIME, +1, RobotMap.TURN_TIME);
 				break;
+					
 		}
 	}
 
@@ -100,6 +120,8 @@ public class Robot extends IterativeRobot {
 		 */
 
 		// schedule the autonomous command (example)
+		
+		SmartDashboard.putBoolean("Robot.autonomousInit()",true);
 		if (autonomousCommand != null)
 			autonomousCommand.start();
 	}
@@ -109,6 +131,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousPeriodic() {
+		SmartDashboard.putBoolean("Robot.autonomousPeriodic()",true);
 		Scheduler.getInstance().run();
 	}
 

@@ -22,7 +22,9 @@ public class DriveTrain extends Subsystem {
 	VictorSP b_rightMotor = new VictorSP(RobotMap.BACK_RIGHT_MOTOR);
 	VictorSP b_leftMotor = new VictorSP(RobotMap.BACK_LEFT_MOTOR);
 
-	
+	public DriveTrain(){
+		
+	}
 	// put this line back and it stops uploading properly.. Don't know why it's a problem...
 	private RobotDrive m_robotDrive = new RobotDrive(f_leftMotor, b_leftMotor, f_rightMotor, b_rightMotor);//RobotMap.FRONT_LEFT_MOTOR, RobotMap.BACK_LEFT_MOTOR, RobotMap.FRONT_RIGHT_MOTOR, RobotMap.BACK_RIGHT_MOTOR);
 	
@@ -38,21 +40,15 @@ public class DriveTrain extends Subsystem {
 	}
 	
 	public void setLeftDriveMotor(double speed){
-	/*
 		f_leftMotor.set(speed);
 		b_leftMotor.set(speed);
-		*/
 	}
 	public void setRightDriveMotor(double speed){
-		/*
 		f_rightMotor.set(-speed);
 		b_rightMotor.set(-speed);
-		*/
 	}
 	public void setDriveMotors(double speed){
-		/*
 		setLeftDriveMotor(speed);
 		setRightDriveMotor(speed);
-		*/
 	}
 }
