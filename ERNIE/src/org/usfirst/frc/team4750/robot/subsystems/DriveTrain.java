@@ -17,20 +17,28 @@ public class DriveTrain extends Subsystem {
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
 	
-	VictorSP f_rightMotor = new VictorSP(RobotMap.FRONT_RIGHT_MOTOR);
-	VictorSP f_leftMotor = new VictorSP(RobotMap.FRONT_LEFT_MOTOR);
-	VictorSP b_rightMotor = new VictorSP(RobotMap.BACK_RIGHT_MOTOR);
-	VictorSP b_leftMotor = new VictorSP(RobotMap.BACK_LEFT_MOTOR);
-
-	public DriveTrain(){
-		
-	}
+	private VictorSP f_rightMotor;
+	private VictorSP f_leftMotor;
+	private VictorSP b_rightMotor;
+	private VictorSP b_leftMotor;
 	// put this line back and it stops uploading properly.. Don't know why it's a problem...
-	private RobotDrive m_robotDrive = new RobotDrive(f_leftMotor, b_leftMotor, f_rightMotor, b_rightMotor);//RobotMap.FRONT_LEFT_MOTOR, RobotMap.BACK_LEFT_MOTOR, RobotMap.FRONT_RIGHT_MOTOR, RobotMap.BACK_RIGHT_MOTOR);
+	private RobotDrive robotDrive;
+		
 	
 	
-	public void controllerDrive(Joystick i) {
-		m_robotDrive.mecanumDrive_Cartesian(i.getRawAxis(0), -i.getRawAxis(3), -i.getRawAxis(1), 0);
+	public DriveTrain(int frontLeftMotorPort, int backLeftMotorPort, int frontRightMotorPort, int backRightMotorPort){
+		f_leftMotor = new VictorSP(frontLeftMotorPort);
+		b_leftMotor = new VictorSP(backLeftMotorPort);
+		f_rightMotor = new VictorSP(frontRightMotorPort);
+		b_rightMotor = new VictorSP(backRightMotorPort);
+		
+		robotDrive = new RobotDrive(f_leftMotor, b_leftMotor, f_rightMotor, b_rightMotor);    //RobotMap.FRONT_LEFT_MOTOR, RobotMap.BACK_LEFT_MOTOR, RobotMap.FRONT_RIGHT_MOTOR, RobotMap.BACK_RIGHT_MOTOR);
+	}
+	
+	
+	public void controllerDrive(double xDirSpeed, double yDirSpeed, double rotationSpeed, double gyroAngle) {
+		robotDrive.mecanumDrive_Cartesian(xDirSpeed, -yDirSpeed, -rotationSpeed, gyroAngle);    //double x, double y, double rotation, double gyroAngle
+
 	}
 
 	public void initDefaultCommand() {

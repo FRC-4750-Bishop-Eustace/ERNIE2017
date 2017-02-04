@@ -1,5 +1,7 @@
 package org.usfirst.frc.team4750.robot.commands;
 
+import org.usfirst.frc.team4750.robot.Robot;
+
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -7,7 +9,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class AutoDriveForwardAndTurn extends CommandGroup {
 		
 	public AutoDriveForwardAndTurn(double driveSpeed, double driveTime, double turnSpeed, double turnTime){
-		SmartDashboard.putBoolean("AutoDriveForwardAndTurn.AutoDriveForwardAndTurn()",true);
+		//SmartDashboard.putBoolean("AutoDriveForwardAndTurn.AutoDriveForwardAndTurn()",true);
 		addSequential(new AutoMove(driveSpeed, driveSpeed, driveTime));
 		addSequential(new AutoMove(turnSpeed, -turnSpeed, turnTime));
 	}

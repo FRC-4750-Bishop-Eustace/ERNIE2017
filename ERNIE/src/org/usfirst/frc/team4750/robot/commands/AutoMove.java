@@ -22,7 +22,7 @@ public class AutoMove extends Command {
 		this.rightSpeed = rightSpeed;
 		this.driveTime = driveTime;
 		
-		SmartDashboard.putBoolean("AutoMove.AutoMove()", true);
+//		SmartDashboard.putBoolean("AutoMove.AutoMove()", true);
 		
 	}
 	
@@ -34,39 +34,36 @@ public class AutoMove extends Command {
 		Robot.driveTrain.setRightDriveMotor(rightSpeed);
 		timer.start();
 		
-		SmartDashboard.putBoolean("AutoMove.initialize()", true);
+//		SmartDashboard.putBoolean("AutoMove.initialize()", true);
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-		SmartDashboard.putBoolean("AutoMove.execute()", true);
+//		SmartDashboard.putBoolean("AutoMove.execute()", true);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	protected boolean isFinished() {
-		SmartDashboard.putBoolean("AutoMove.isFinished()", true);
+//		SmartDashboard.putBoolean("AutoMove.isFinished()", true);
 		
-		if(timer.get() > driveTime){
-			return true;
-		} else {
-			return false;
-		}
+		return timer.get() > driveTime;
 	}
 
 	// Called once after isFinished returns true
 	@Override
 	protected void end() {
-		SmartDashboard.putBoolean("AutoMove.end()", true);
+//		SmartDashboard.putBoolean("AutoMove.end()", true);
 		Robot.driveTrain.setDriveMotors(0);
+		timer.stop();
 	}
 
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
 	@Override
 	protected void interrupted() {
-		SmartDashboard.putBoolean("AutoMove.interrupted()",true);
+//		SmartDashboard.putBoolean("AutoMove.interrupted()",true);
 		end();
 	}
 }

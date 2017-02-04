@@ -9,7 +9,7 @@ package org.usfirst.frc.team4750.robot;
 public class RobotMap {
 	
 	//USB Ports
-	public static int DRIVE_STICK_USB_PORT = 0;
+	public static final int DRIVE_STICK_USB_PORT = 0;
 	
 	//PWM Motor Ports
 	public static final int FRONT_LEFT_MOTOR = 1;

@@ -25,7 +25,10 @@ public class Robot extends IterativeRobot {
 
 	//public static final MecDrive MecDrive = new MecDrive(0, 0);
 	//public static final MecDrive MecDrive = new MecDrive();
-	public static final DriveTrain driveTrain = new DriveTrain();
+	public static final DriveTrain driveTrain = new DriveTrain(RobotMap.FRONT_LEFT_MOTOR,
+															   RobotMap.BACK_LEFT_MOTOR,
+															   RobotMap.FRONT_RIGHT_MOTOR,
+															   RobotMap.BACK_RIGHT_MOTOR);
 	
 	//public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static OI oi;
@@ -41,32 +44,32 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
-		SmartDashboard.putBoolean("Robot.robotInit()",true);
+		SmartDashboard.putData(driveTrain);
 		
-		SmartDashboard.putBoolean("Robot.autonomousInit()",false);
-		SmartDashboard.putBoolean("Robot.autonomousPeriodic()",false);
-		SmartDashboard.putBoolean("AutoDriveForwardAndTurn.AutoDriveForwardAndTurn()",false);
-		SmartDashboard.putBoolean("AutoMove.AutoMove()",false);
-		SmartDashboard.putBoolean("AutoMove.initialize()",false);
-		SmartDashboard.putBoolean("AutoMove.execute()",false);
-		SmartDashboard.putBoolean("AutoMove.isFinished()",false);
-		SmartDashboard.putBoolean("AutoMove.end()",false);
-		SmartDashboard.putBoolean("AutoMove.interrupted()",false);
-		SmartDashboard.putBoolean("MecDrive.MecDrive()",false);
-		SmartDashboard.putBoolean("MecDrive.initialize()",false);
-		SmartDashboard.putBoolean("MecDrive.execute()",false);
-		SmartDashboard.putBoolean("MecDrive.isFinished()",false);
-		SmartDashboard.putBoolean("MecDrive.end()",false);
-		SmartDashboard.putBoolean("MecDrive.interrupted()",false);
+//		SmartDashboard.putBoolean("Robot.robotInit()",true);
 		
-		
-		
+//		SmartDashboard.putBoolean("Robot.autonomousInit()",false);
+//		SmartDashboard.putBoolean("Robot.autonomousPeriodic()",false);
+//		SmartDashboard.putBoolean("AutoDriveForwardAndTurn.AutoDriveForwardAndTurn()",false);
+//		SmartDashboard.putBoolean("AutoMove.AutoMove()",false);
+//		SmartDashboard.putBoolean("AutoMove.initialize()",false);
+//		SmartDashboard.putBoolean("AutoMove.execute()",false);
+//		SmartDashboard.putBoolean("AutoMove.isFinished()",false);
+//		SmartDashboard.putBoolean("AutoMove.end()",false);
+//		SmartDashboard.putBoolean("AutoMove.interrupted()",false);
+//		SmartDashboard.putBoolean("MecDrive.MecDrive()",false);
+//		SmartDashboard.putBoolean("MecDrive.initialize()",false);
+//		SmartDashboard.putBoolean("MecDrive.execute()",false);
+//		SmartDashboard.putBoolean("MecDrive.isFinished()",false);
+//		SmartDashboard.putBoolean("MecDrive.end()",false);
+//		SmartDashboard.putBoolean("MecDrive.interrupted()",false);
+
 		oi = new OI();
 		//chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		//SmartDashboard.putData("Auto mode", chooser);
 		
-		autoMode = AutoMode.DRIVE_FORWARD_AND_TURN;
+		autoMode = AutoMode.MOVE_FORWARD;
 		
 		// (left speed, right speed, time)
 		switch(autoMode){
