@@ -44,25 +44,6 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
-		SmartDashboard.putData(driveTrain);
-		
-//		SmartDashboard.putBoolean("Robot.robotInit()",true);
-		
-//		SmartDashboard.putBoolean("Robot.autonomousInit()",false);
-//		SmartDashboard.putBoolean("Robot.autonomousPeriodic()",false);
-//		SmartDashboard.putBoolean("AutoDriveForwardAndTurn.AutoDriveForwardAndTurn()",false);
-//		SmartDashboard.putBoolean("AutoMove.AutoMove()",false);
-//		SmartDashboard.putBoolean("AutoMove.initialize()",false);
-//		SmartDashboard.putBoolean("AutoMove.execute()",false);
-//		SmartDashboard.putBoolean("AutoMove.isFinished()",false);
-//		SmartDashboard.putBoolean("AutoMove.end()",false);
-//		SmartDashboard.putBoolean("AutoMove.interrupted()",false);
-//		SmartDashboard.putBoolean("MecDrive.MecDrive()",false);
-//		SmartDashboard.putBoolean("MecDrive.initialize()",false);
-//		SmartDashboard.putBoolean("MecDrive.execute()",false);
-//		SmartDashboard.putBoolean("MecDrive.isFinished()",false);
-//		SmartDashboard.putBoolean("MecDrive.end()",false);
-//		SmartDashboard.putBoolean("MecDrive.interrupted()",false);
 
 		oi = new OI();
 		//chooser.addDefault("Default Auto", new ExampleCommand());
