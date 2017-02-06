@@ -22,7 +22,7 @@ public class AutoMove extends Command {
 		this.rightSpeed = rightSpeed;
 		this.driveTime = driveTime;
 		
-		SmartDashboard.putBoolean("AutoMove.AutoMove()", true);
+//		SmartDashboard.putBoolean("AutoMove.AutoMove()", true);
 		
 	}
 	
@@ -34,7 +34,7 @@ public class AutoMove extends Command {
 		Robot.driveTrain.setRightDriveMotor(rightSpeed);
 		timer.start();
 		SmartDashboard.getNumber("Timer:", timer.get());
-		
+
 		SmartDashboard.putBoolean("AutoMove.initialize()", true);
 	}
 

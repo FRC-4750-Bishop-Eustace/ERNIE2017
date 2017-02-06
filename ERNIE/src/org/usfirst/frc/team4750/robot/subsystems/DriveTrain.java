@@ -6,7 +6,6 @@ import org.usfirst.frc.team4750.robot.Robot;
 import org.usfirst.frc.team4750.robot.RobotMap;
 import org.usfirst.frc.team4750.robot.commands.MecDrive;
 
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.VictorSP;
 
