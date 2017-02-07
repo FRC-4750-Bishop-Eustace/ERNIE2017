@@ -4,13 +4,11 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team4750.robot.commands.AutoDriveForwardAndTurn;
-//import org.usfirst.frc.team4750.robot.commands.ExampleCommand;
-import org.usfirst.frc.team4750.robot.commands.MecDrive;
 import org.usfirst.frc.team4750.robot.commands.AutoMove;
+//import org.usfirst.frc.team4750.robot.commands.ExampleCommand;
 import org.usfirst.frc.team4750.robot.subsystems.DriveTrain;
 //import org.usfirst.frc.team4750.robot.subsystems.ExampleSubsystem;
 

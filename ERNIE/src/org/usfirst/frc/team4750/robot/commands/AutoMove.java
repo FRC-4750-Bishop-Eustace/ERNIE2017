@@ -64,7 +64,7 @@ public class AutoMove extends Command {
 	// subsystems is scheduled to run
 	@Override
 	protected void interrupted() {
-		SmartDashboard.putBoolean("AutoMove.interrupted()",true);
+		SmartDashboard.putBoolean("AutoMove.interrupted()", true);
 		end();
 	}
 }
