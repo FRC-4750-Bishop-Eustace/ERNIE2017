@@ -48,16 +48,19 @@ public class AutoMove extends Command {
 	@Override
 	protected boolean isFinished() {
 		SmartDashboard.putBoolean("AutoMove.isFinished()", true);
-		
-		return timer.get() > driveTime;
+		if(timer.get() > driveTime) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	// Called once after isFinished returns true
 	@Override
 	protected void end() {
 		SmartDashboard.putBoolean("AutoMove.end()", true);
-		Robot.driveTrain.setDriveMotors(0);
-		timer.stop();
+		//Robot.driveTrain.setDriveMotors(0);
+		//timer.stop();
 	}
 
 	// Called when another command which requires one or more of the same
@@ -65,6 +68,5 @@ public class AutoMove extends Command {
 	@Override
 	protected void interrupted() {
 		SmartDashboard.putBoolean("AutoMove.interrupted()", true);
-		end();
 	}
 }
