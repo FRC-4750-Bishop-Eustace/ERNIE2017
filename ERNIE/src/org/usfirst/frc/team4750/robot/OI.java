@@ -4,6 +4,7 @@ import org.usfirst.frc.team4750.robot.commands.Lifting;
 import org.usfirst.frc.team4750.robot.commands.SetIntakeSpeed;
 import org.usfirst.frc.team4750.robot.commands.SetShooterSpeed;
 //import org.usfirst.frc.team4750.robot.commands.Shooting;
+import org.usfirst.frc.team4750.robot.commands.SwitchingCameras;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -24,7 +25,7 @@ public class OI {
 	Button shootButton = new JoystickButton(driveStick, 1);
 	Button intakeButton = new JoystickButton(driveStick, 2);
 	Button lifterButton = new JoystickButton(driveStick, 3);
-	Button cameraButton = new JoystickButton(driveStick, 4);
+	public Button cameraButton = new JoystickButton(driveStick, 4);
 
 	
 	public OI(){
@@ -32,6 +33,6 @@ public class OI {
 		shootButton.whileHeld(new SetShooterSpeed());
 		intakeButton.whenPressed(new SetIntakeSpeed());
 		lifterButton.whileHeld(new Lifting());// will be changed to prob active so we can have the speeds change to help with lifting
-		
+		cameraButton.toggleWhenPressed(new SwitchingCameras());
 	}
 }
