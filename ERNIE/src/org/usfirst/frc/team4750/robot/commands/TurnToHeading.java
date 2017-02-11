@@ -12,8 +12,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * @author mkopack
  * Use this to perform a controlled automatic turn to a given heading.
  * 
- * The basic idea here is to take in a target heading (where we want to turn to).
- * Figure out which way we need to turn (left or right)
+ * The basic idea here is to take in an amount to turn in degrees.
  * Then, use what's called a PID controller to control how fast we need the motors to turn to 
  * change the heading. The closer we are to the target heading the slower we command the motors
  * so we don't overshoot.
@@ -21,28 +20,41 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class TurnToHeading extends Command {
 
+	double offset;
 	double targetheading;
+	double startheading;
 	double lastheadingread;
 	
-	public TurnToHeading(double target) {
-		targetheading = target;
+	/**
+	 * Constructor.
+	 * @param offset degrees we need to turn to reach goal. Often this will come from the vision system. 
+	 * Negative numbers indicate a left turn, positive are a right turn.
+	 */
+	public TurnToHeading(double offset) {
+		this.offset = offset;
 	}
 	
 	@Override
 	protected void initialize() {
+		//do a reset of the IMU here
+		//read the IMU, store the value into startheading
 		
+		startheading = 0; // READ FROM IMU!!!
+		
+		targetheading = startheading + offset;
+		// handle the under/overflow conditions where we cross 360/0
+		if(targetheading < 0)
+			targetheading = 360+targetheading;
+		if(targetheading > 360)
+			targetheading = targetheading-360;
 	}
 	
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
 		// read the current value from the IMU.
-		// lastheadingread = ;
+		// lastheadingread = ; // READ FROM IMU
 		
-		// handle the situation that we would cross across the 0/360 boundary.
-		
-		// if current < target, plan to turn right
-		// if current < target, plan to turn left
 		
 		// the farther off the target we are, the higher we need to set the motors
 		// x/1.0 = degreesofftarget/180;
@@ -50,6 +62,12 @@ public class TurnToHeading extends Command {
 		// so if x< minumum, if we're within 2 degrees of target, just consider us done. 
 		//  otherwise set us to the minimum motor speed.
 		double speed = 0.0; //= degreesoffset/180.0;
+		// see if we need to turn left or right. If the offset is - then we need to turn left.
+		if(offset<0.0)
+			speed = speed * -1.0;
+		// otherwise we're going right and we're fine...
+		
+		// now tell it to turn!
 		Robot.driveTrain.setDriveMotors(speed, -1.0*speed);
 	}
 	
@@ -59,6 +77,7 @@ public class TurnToHeading extends Command {
 	@Override
 	protected boolean isFinished() {
 		// TODO Auto-generated method stub
+		// if we're within 2 degrees of the target,
 		if (lastheadingread-targetheading <2.0 || targetheading-lastheadingread<2.0) {
 			//close enough!
 			return true;
