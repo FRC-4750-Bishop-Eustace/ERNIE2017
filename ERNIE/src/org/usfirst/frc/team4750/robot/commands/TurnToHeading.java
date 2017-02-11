@@ -7,7 +7,7 @@ import org.usfirst.frc.team4750.robot.Robot;
 
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.I2C;
-
+import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -40,25 +40,31 @@ public class TurnToHeading extends Command {
 	
 	@Override
 	protected void initialize() {
+		SmartDashboard.putBoolean("TurnToHeading.IMUCalibrated", false);
 		//do a reset of the IMU here
 		try
 		{
+			SmartDashboard.putString("TurnToHeading.IMU Setup?", "Instantiating");
             /* Communicate w/navX-MXP via the I2C Bus.                                       */			
-            ahrs = new AHRS(I2C.Port.kMXP);
+            ahrs = new AHRS(SerialPort.Port.kUSB);
             ahrs.reset();
+            SmartDashboard.putString("TurnToHeading.IMU Setup?", "Setup");
             
         } catch (Exception ex ) {
             System.out.println("Error instantiating navX-MXP:  "+ex.getMessage());
-            
+            SmartDashboard.putString("TurnToHeading.IMU Setup error", ex.getMessage());
     	}
 		
 		//read the IMU, store the value into startheading
+		/*
 		while(ahrs.isCalibrating()) {
 			// do nothing, wait.
 		}
+		*/
 		// done calibrating..
+		SmartDashboard.putBoolean("TurnToHeading.IMUCalibrated", true);
 		// READ FROM IMU!!!
-		startheading = ahrs.getCompassHeading();
+		startheading = ahrs.getFusedHeading();
 		
 		targetheading = startheading + offset;
 		// handle the under/overflow conditions where we cross 360/0
@@ -66,13 +72,17 @@ public class TurnToHeading extends Command {
 			targetheading = 360+targetheading;
 		if(targetheading > 360)
 			targetheading = targetheading-360;
+		SmartDashboard.putDouble("TurnToHeading.CurrentHeading", startheading);
+		SmartDashboard.putDouble("TurnToHeading.TargetHeading", targetheading);
+		SmartDashboard.putDouble("TurnToHeading.Offset", offset);
 	}
 	
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
+		SmartDashboard.putString("TurnToHeading.IMU Setup?", "Running");
 		// read the current value from the IMU.
-		lastheadingread = ahrs.getCompassHeading() ; // READ FROM IMU
+		lastheadingread = ahrs.getFusedHeading(); // READ FROM IMU
 		
 		// find the difference between where we are now and where we're trying to get to
 		
@@ -111,13 +121,18 @@ public class TurnToHeading extends Command {
 
 		// note that there IS a minimum power setting or else we won't turn at all (motors will stall)
 		// so if we're commanding less than say .2, set it to .2 and then adjust the sign to match what it was.
-		if(Math.abs(speed) < .2) {
+		if(Math.abs(speed) < .3) {
 			if(speed<0)
-				speed=-0.2f;
+				speed=-0.3f;
 			else
-				speed=0.2f;
+				speed=0.3f;
 		}
 		// now tell it to turn!
+		SmartDashboard.putDouble("TurnToHeading.CurrentHeading", lastheadingread);
+		SmartDashboard.putDouble("TurnToHeading.TargetHeading", targetheading);
+		SmartDashboard.putDouble("TurnToHeading.Offset", offset);
+		SmartDashboard.putDouble("TurnToHeading.Speed", speed);
+		//System.out.println("TargetHeading:"+targetheading+"  Currentheading:"+lastheadingread+"   Offset:"+offset+"  Speed:"+speed);
 		Robot.driveTrain.setDriveMotors(speed, -1.0*speed);
 	}
 	
@@ -140,6 +155,7 @@ public class TurnToHeading extends Command {
 	protected void end() {
 		// let's stop
 		Robot.driveTrain.setDriveMotors(0.0, 0.0);
+		SmartDashboard.putString("TurnToHeading.IMU Setup?", "ENDED!!!");
 	}
 
 	// Called when another command which requires one or more of the same
