@@ -41,7 +41,7 @@ public class RobotMap {
 	
 	
 	
-	public static final int SELECTOR_HIGH_DIO = 1;
-	public static final int SELECTOR_MID_DIO =2;
-	public static final int SELECTOR_LOW_DIO = 3;
+	public static final int SELECTOR_HIGH_DIO = 1;  // (On switch, closest to the middle)
+	public static final int SELECTOR_MID_DIO =2; // (on switch, between edge and middle)
+	public static final int SELECTOR_LOW_DIO = 3; // (on switch, edge)
 }

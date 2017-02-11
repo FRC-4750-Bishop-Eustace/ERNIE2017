@@ -3,6 +3,8 @@
  */
 package org.usfirst.frc.team4750.robot.subsystems;
 
+import java.util.Arrays;
+
 import org.usfirst.frc.team4750.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -37,38 +39,27 @@ public class AutoSwitch extends Subsystem {
 	}
 	
 	public CommandGroup getMode() {
+		
+		/**
+		 * HIGH    MID    LOW     SWITCHPOS
+		 * T        T      F         1
+		 * T        F      F         2
+		 * T        F      T         3
+		 * F        F      T         4
+		 * F        T      T         5
+		 */
+			
 		boolean highval = highinput.get();
 		boolean midval = midinput.get();
 		boolean lowval = lowinput.get();
 		int switchpos=0;
 		
-		if(highval == true) {
-			if(midval == true) {
-				switchpos = 2;
-			}
-			else {
-				switchpos = 1;
-			}
-		}  
-		else if(midval == true) {
-			if(highval == true) {
-				switchpos = 2;
-			}
-			else if(lowval == true){ 
-				switchpos = 4;
-			}
-			else {
-				switchpos = 3;
-			}
-		}
-		else if(lowval ==true) {
-			if(midval == true) {
-				switchpos = 4;
-			}
-			else { 
-				switchpos = 5;
-			}
-		}
+		if(highval && midval && ! lowval) switchpos =1;
+		else if(highval && !midval && !lowval) switchpos = 2;
+		else if(highval && !midval && lowval) switchpos = 3;
+		else if(!highval && !midval && lowval) switchpos = 4;
+		else if(!highval && midval && lowval) switchpos = 5;
+		
 		//Now that we know which position our switch is in, let's assign the proper autogroup to execute.
 		
 		/*
@@ -76,8 +67,13 @@ public class AutoSwitch extends Subsystem {
 		 * Position 2 - Facing center of arena, start at middle. Deliver to center gear delivery location
 		 * Position 3 - Facing center of arena, start at left side, delivery to left gear delivery location, then move towards center of arena
 		 * Position 4 - Facing center of arena, start at left side, delivery to left gear delivery location, then go to shooting
-	 	 * Position 5 
+	 	 * Position 5 - do nothing
 	 	 */
+		
+		SmartDashboard.putBoolean("AutoSwitch.High",highval);
+		SmartDashboard.putBoolean("AutoSwitch.Mid",midval);
+		SmartDashboard.putBoolean("AutoSwitch.low",lowval);
+		
 		SmartDashboard.putNumber("AutoSwitch.Position", switchpos);
 		
 		return null;
