@@ -8,6 +8,7 @@ import org.usfirst.frc.team4750.robot.commands.SetShooterSpeed;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.command.Command;
 
 //import org.usfirst.frc.team4750.robot.commands.ExampleCommand;
 
@@ -23,6 +24,8 @@ public class OI {
 	Button shootButton = new JoystickButton(driveStick, 1);
 	Button intakeButton = new JoystickButton(driveStick, 2);
 	Button lifterButton = new JoystickButton(driveStick, 3);
+	Button cameraButton = new JoystickButton(driveStick, 4);
+
 	
 	public OI(){
 		//where the commands for the buttons are placed

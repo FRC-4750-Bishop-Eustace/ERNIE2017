@@ -1,20 +1,26 @@
 
 package org.usfirst.frc.team4750.robot;
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.cscore.CameraServerJNI;
+import edu.wpi.cscore.CvSink;
+import edu.wpi.cscore.CvSource;
+import edu.wpi.cscore.UsbCamera;
+
 
 import org.usfirst.frc.team4750.robot.subsystems.Agitator;
-//import org.usfirst.frc.team4750.robot.commands.ExampleCommand;
 import org.usfirst.frc.team4750.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team4750.robot.subsystems.Intake;
 import org.usfirst.frc.team4750.robot.subsystems.Lifter;
 import org.usfirst.frc.team4750.robot.subsystems.Shooter;
-//import org.usfirst.frc.team4750.robot.subsystems.ExampleSubsystem;
+import org.opencv.core.Mat;
+import org.usfirst.frc.team4750.robot.OI;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -48,6 +54,47 @@ public class Robot extends IterativeRobot {
 		//chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
+	
+Thread t = new Thread(() -> {
+    		
+    		//boolean allowCam1 = false;
+    		//boolean allowCam2 = false;
+    		
+    		
+    		UsbCamera camera1 = new UsbCamera("USB Camera 1", 0);
+            camera1.setResolution(320, 240);
+            camera1.setFPS(20);
+            UsbCamera camera2 = new UsbCamera("USB Camera 2", 1);
+            camera2.setResolution(320, 240);
+            camera2.setFPS(20);
+            /*UsbCamera camera3 = CameraServer.getInstance().startAutomaticCapture(3);
+            camera3.setResolution(320, 240);
+            camera3.setFPS(30);*/
+            
+            
+            CvSink cvSink = CameraServer.getInstance().getVideo(camera1);
+            //CvSink cvSink2 = CameraServer.getInstance().getVideo(camera2);
+            //CvSink cvSink3 = CameraServer.getInstance().getVideo(camera3);
+            CvSource outputStream = CameraServer.getInstance().putVideo("Current View", 320, 240);
+            
+            Mat image = new Mat();
+            while(!Thread.interrupted()) {
+            	cvSink.grabFrame(image);
+            	
+            	if(oi.cameraButton.get()) {
+            		cvSink.setSource(camera2);
+            		cvSink.grabFrame(image);
+            	}else{
+            		cvSink.setSource(camera1);
+            		cvSink.grabFrame(image);
+            	}
+                
+                outputStream.putFrame(image);
+            }
+            
+        });
+        t.start();
+		
 	}
 
 	/**
