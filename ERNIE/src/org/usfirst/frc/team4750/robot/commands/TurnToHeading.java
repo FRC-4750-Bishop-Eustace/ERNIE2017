@@ -5,6 +5,9 @@ package org.usfirst.frc.team4750.robot.commands;
 
 import org.usfirst.frc.team4750.robot.Robot;
 
+import com.kauailabs.navx.frc.AHRS;
+import edu.wpi.first.wpilibj.I2C;
+
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -20,26 +23,42 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class TurnToHeading extends Command {
 
-	double offset;
-	double targetheading;
-	double startheading;
-	double lastheadingread;
+	float offset;
+	float targetheading;
+	float startheading;
+	float lastheadingread;
+	AHRS ahrs; // navX-MXP IMU
 	
 	/**
 	 * Constructor.
 	 * @param offset degrees we need to turn to reach goal. Often this will come from the vision system. 
 	 * Negative numbers indicate a left turn, positive are a right turn.
 	 */
-	public TurnToHeading(double offset) {
+	public TurnToHeading(float offset) {
 		this.offset = offset;
 	}
 	
 	@Override
 	protected void initialize() {
 		//do a reset of the IMU here
-		//read the IMU, store the value into startheading
+		try
+		{
+            /* Communicate w/navX-MXP via the I2C Bus.                                       */			
+            ahrs = new AHRS(I2C.Port.kMXP);
+            ahrs.reset();
+            
+        } catch (Exception ex ) {
+            System.out.println("Error instantiating navX-MXP:  "+ex.getMessage());
+            
+    	}
 		
-		startheading = 0; // READ FROM IMU!!!
+		//read the IMU, store the value into startheading
+		while(ahrs.isCalibrating()) {
+			// do nothing, wait.
+		}
+		// done calibrating..
+		// READ FROM IMU!!!
+		startheading = ahrs.getCompassHeading();
 		
 		targetheading = startheading + offset;
 		// handle the under/overflow conditions where we cross 360/0
@@ -53,20 +72,51 @@ public class TurnToHeading extends Command {
 	@Override
 	protected void execute() {
 		// read the current value from the IMU.
-		// lastheadingread = ; // READ FROM IMU
+		lastheadingread = ahrs.getCompassHeading() ; // READ FROM IMU
+		
+		// find the difference between where we are now and where we're trying to get to
+		
+		/*
+		 * Target     Last     Offset
+		 * -------    ----     ------
+		 * 340         10       -30
+		 *  10        340        30
+		 * 120        190       -70
+		 * 190        120        70   
+		 */
+		
+		/*  If absolute value of Target - currentheading < 180 then offset = target-currentheading.
+		 * 	else 
+		 * 		if target-heading > 0  then offset = target-heading-360
+		 * 		else if target-heading < 0 then offset = target - heading + 360.
+		 * 		else if target-heading == 0 then offset = 0;
+		 */
+
+		if(Math.abs(targetheading - lastheadingread) < 180) {
+			offset = targetheading - lastheadingread;
+		} else {
+			if(targetheading - lastheadingread > 0) {
+				offset = targetheading - lastheadingread-360;
+			} else if(targetheading - lastheadingread < 0) {
+				offset = targetheading - lastheadingread+360;
+			}
+			else
+				offset = 0;
+		}
 		
 		
 		// the farther off the target we are, the higher we need to set the motors
-		// x/1.0 = degreesofftarget/180;
+		// speed/1.0 = degreesofftarget/180;
+		float speed = offset/180.0f;
+
 		// note that there IS a minimum power setting or else we won't turn at all (motors will stall)
-		// so if x< minumum, if we're within 2 degrees of target, just consider us done. 
-		//  otherwise set us to the minimum motor speed.
-		double speed = 0.0; //= degreesoffset/180.0;
-		// see if we need to turn left or right. If the offset is - then we need to turn left.
-		if(offset<0.0)
-			speed = speed * -1.0;
-		// otherwise we're going right and we're fine...
-		
+		// so if we're commanding less than say .2, set it to .2 and then adjust the sign to match what it was.
+		if(Math.abs(speed) < .2) {
+			if(speed<0)
+				speed=-0.2f;
+			else
+				speed=0.2f;
+		}
 		// now tell it to turn!
 		Robot.driveTrain.setDriveMotors(speed, -1.0*speed);
 	}
@@ -78,7 +128,7 @@ public class TurnToHeading extends Command {
 	protected boolean isFinished() {
 		// TODO Auto-generated method stub
 		// if we're within 2 degrees of the target,
-		if (lastheadingread-targetheading <2.0 || targetheading-lastheadingread<2.0) {
+		if (Math.abs(offset) <2.0) {
 			//close enough!
 			return true;
 		}
