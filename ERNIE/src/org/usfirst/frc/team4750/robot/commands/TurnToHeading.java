@@ -6,7 +6,6 @@ package org.usfirst.frc.team4750.robot.commands;
 import org.usfirst.frc.team4750.robot.Robot;
 
 import com.kauailabs.navx.frc.AHRS;
-import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
