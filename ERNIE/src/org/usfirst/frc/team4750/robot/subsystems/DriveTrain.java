@@ -58,4 +58,8 @@ public class DriveTrain extends Subsystem {
 		setLeftDriveMotor(speed);
 		setRightDriveMotor(speed);
 	}
+	public void setDriveMotors(double leftspeed, double rightspeed) {
+		setLeftDriveMotor(leftspeed);
+		setRightDriveMotor(rightspeed);
+	}
 }
