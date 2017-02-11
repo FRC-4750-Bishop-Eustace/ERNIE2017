@@ -9,6 +9,9 @@ import org.usfirst.frc.team4750.robot.commands.MecDrive;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.VictorSP;
 
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Victor;
+
 /**
  *
  */
@@ -26,6 +29,7 @@ public class DriveTrain extends Subsystem {
 	
 	
 	public DriveTrain(int frontLeftMotorPort, int backLeftMotorPort, int frontRightMotorPort, int backRightMotorPort){
+		setDefaultCommand(new MecDrive());
 		f_leftMotor = new VictorSP(frontLeftMotorPort);
 		b_leftMotor = new VictorSP(backLeftMotorPort);
 		f_rightMotor = new VictorSP(frontRightMotorPort);
@@ -37,9 +41,8 @@ public class DriveTrain extends Subsystem {
 	
 	public void controllerDrive(double xDirSpeed, double yDirSpeed, double rotationSpeed, double gyroAngle) {
 		robotDrive.mecanumDrive_Cartesian(xDirSpeed, -yDirSpeed, -rotationSpeed, gyroAngle);    //double x, double y, double rotation, double gyroAngle
-
 	}
-
+	
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
 		// setDefaultCommand(new MySpecialCommand());

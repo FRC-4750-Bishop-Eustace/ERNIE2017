@@ -4,12 +4,19 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team4750.robot.commands.AutoDriveForwardAndTurn;
 import org.usfirst.frc.team4750.robot.commands.AutoMove;
 import org.usfirst.frc.team4750.robot.commands.TurnToHeading;
 //import org.usfirst.frc.team4750.robot.commands.ExampleCommand;
+
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+
+//import org.usfirst.frc.team4750.robot.commands.ExampleCommand;
+import org.usfirst.frc.team4750.robot.commands.MecDrive;
+
 import org.usfirst.frc.team4750.robot.subsystems.DriveTrain;
 //import org.usfirst.frc.team4750.robot.subsystems.ExampleSubsystem;
 
@@ -21,13 +28,16 @@ import org.usfirst.frc.team4750.robot.subsystems.DriveTrain;
  * directory.
  */
 public class Robot extends IterativeRobot {
-
 	//public static final MecDrive MecDrive = new MecDrive(0, 0);
 	//public static final MecDrive MecDrive = new MecDrive();
 	public static final DriveTrain driveTrain = new DriveTrain(RobotMap.FRONT_LEFT_MOTOR,
 															   RobotMap.BACK_LEFT_MOTOR,
 															   RobotMap.FRONT_RIGHT_MOTOR,
 															   RobotMap.BACK_RIGHT_MOTOR);
+	//TESTING...
+
+	//public static final MecDrive MecDrive = new MecDrive(0, 0);
+	//public static final MecDrive MecDrive = new MecDrive();
 	
 	//public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static OI oi;
@@ -43,7 +53,6 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
-
 		oi = new OI();
 		//chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
@@ -97,18 +106,7 @@ public class Robot extends IterativeRobot {
 	 * to the switch structure below with additional strings & commands.
 	 */
 	@Override
-	public void autonomousInit() {
-		//autonomousCommand = chooser.getSelected();
-
-		/*
-		 * String autoSelected = SmartDashboard.getString("Auto Selector",
-		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
-		 * = new MyAutoCommand(); break; case "Default Auto": default:
-		 * autonomousCommand = new ExampleCommand(); break; }
-		 */
-
-		// schedule the autonomous command (example)
-		
+	public void autonomousInit() {		
 		SmartDashboard.putBoolean("Robot.autonomousInit()",true);
 		if (autonomousCommand != null)
 			autonomousCommand.start();

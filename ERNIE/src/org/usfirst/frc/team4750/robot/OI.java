@@ -1,9 +1,6 @@
 package org.usfirst.frc.team4750.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.buttons.Button;
-
-//import org.usfirst.frc.team4750.robot.commands.ExampleCommand;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -11,11 +8,16 @@ import edu.wpi.first.wpilibj.buttons.Button;
  */
 public class OI {
 	public Joystick driveStick = new Joystick(RobotMap.DRIVE_STICK_USB_PORT);
-
+	//Joystick shootStick = new Joystick(RobotMap.SHOOTER_JOYSTICK_USB_PORT);
+	
+	//Joystick buttons
+	
+	
 	public OI(){
 		
 	}
-	//Joystick shootStick = new Joystick(RobotMap.SHOOTER_JOYSTICK_USB_PORT);
+	//commands with buttons
+	
 	
 	//// CREATING BUTTONS
 	// One type of button is a joystick button which is any button on a
