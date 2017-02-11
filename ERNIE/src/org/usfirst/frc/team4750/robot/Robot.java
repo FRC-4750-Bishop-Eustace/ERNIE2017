@@ -1,15 +1,16 @@
-
 package org.usfirst.frc.team4750.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import org.usfirst.frc.team4750.robot.commands.ExampleCommand;
-import org.usfirst.frc.team4750.robot.subsystems.ExampleSubsystem;
+import org.usfirst.frc.team4750.robot.commands.AutoDriveForwardAndTurn;
+import org.usfirst.frc.team4750.robot.commands.AutoMove;
+//import org.usfirst.frc.team4750.robot.commands.ExampleCommand;
+import org.usfirst.frc.team4750.robot.subsystems.DriveTrain;
+//import org.usfirst.frc.team4750.robot.subsystems.ExampleSubsystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -20,24 +21,50 @@ import org.usfirst.frc.team4750.robot.subsystems.ExampleSubsystem;
  */
 public class Robot extends IterativeRobot {
 
-	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
+	//public static final MecDrive MecDrive = new MecDrive(0, 0);
+	//public static final MecDrive MecDrive = new MecDrive();
+	public static final DriveTrain driveTrain = new DriveTrain(RobotMap.FRONT_LEFT_MOTOR,
+															   RobotMap.BACK_LEFT_MOTOR,
+															   RobotMap.FRONT_RIGHT_MOTOR,
+															   RobotMap.BACK_RIGHT_MOTOR);
+	
+	//public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static OI oi;
-	
-	
 
+	AutoMode autoMode;
+	
 	Command autonomousCommand;
-	SendableChooser<Command> chooser = new SendableChooser<>();
-
+	//SendableChooser<Command> chooser = new SendableChooser<>();
+	
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
 	 */
 	@Override
 	public void robotInit() {
+
 		oi = new OI();
-		chooser.addDefault("Default Auto", new ExampleCommand());
+		//chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
-		SmartDashboard.putData("Auto mode", chooser);
+		//SmartDashboard.putData("Auto mode", chooser);
+		
+		//Set the mode we're going to run in Autonomous...
+		// Normally we'd read this from the mechanical switch
+		autoMode = AutoMode.MOVE_FORWARD;
+		
+		// (left speed, right speed, time)
+		// Ok, see which position the switch is in
+		switch(autoMode){
+			case MOVE_FORWARD:
+				autonomousCommand = new AutoMove(+1.0, 1.0, RobotMap.REACH_TIME);
+				break;
+				
+		// (driveSpeed, driveTime, turnSpeed, turnTime)
+			case DRIVE_FORWARD_AND_TURN:
+				autonomousCommand = new AutoDriveForwardAndTurn(+1, RobotMap.REACH_TIME, +1, RobotMap.TURN_TIME);
+				break;
+					
+		}
 	}
 
 	/**
@@ -68,7 +95,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		autonomousCommand = chooser.getSelected();
+		//autonomousCommand = chooser.getSelected();
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
@@ -78,6 +105,8 @@ public class Robot extends IterativeRobot {
 		 */
 
 		// schedule the autonomous command (example)
+		
+		SmartDashboard.putBoolean("Robot.autonomousInit()",true);
 		if (autonomousCommand != null)
 			autonomousCommand.start();
 	}
@@ -87,6 +116,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousPeriodic() {
+		SmartDashboard.putBoolean("Robot.autonomousPeriodic()",true);
 		Scheduler.getInstance().run();
 	}
 
@@ -96,9 +126,7 @@ public class Robot extends IterativeRobot {
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
-		if (autonomousCommand != null)
-			autonomousCommand.cancel();
-		
+		if (autonomousCommand != null)autonomousCommand.cancel();
 	}
 
 	/**

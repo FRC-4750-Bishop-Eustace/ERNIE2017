@@ -7,6 +7,20 @@ package org.usfirst.frc.team4750.robot;
  * floating around.
  */
 public class RobotMap {
+	
+	//USB Ports
+	public static final int DRIVE_STICK_USB_PORT = 0;
+	
+	//PWM Motor Ports
+	public static final int FRONT_LEFT_MOTOR = 1;
+	public static final int BACK_LEFT_MOTOR = 2;
+	public static final int FRONT_RIGHT_MOTOR = 3;
+	public static final int BACK_RIGHT_MOTOR = 4;
+	
+	//Timers
+	public static final double REACH_TIME = 5;
+	public static final double TURN_TIME = 10;
+
 	// For example to map the left and right motors, you could define the
 	// following variables to use with your drivetrain subsystem.
 	// public static int leftMotor = 1;

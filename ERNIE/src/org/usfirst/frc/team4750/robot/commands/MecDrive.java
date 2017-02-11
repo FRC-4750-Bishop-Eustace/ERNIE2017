@@ -1,51 +1,43 @@
 package org.usfirst.frc.team4750.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
-
 import org.usfirst.frc.team4750.robot.Robot;
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.Victor;
-import edu.wpi.first.wpilibj.RobotDrive;
 
-/**
- *
- */
+import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 public class MecDrive extends Command {
-	public MecDrive() {
-		//creates robot drive object using PWN 1,2,3,4
-		RobotDrive m_robotDrive = new RobotDrive(1,2,3,4);
-		
-		//creates joystick being used in USB port 1 on the Drive Station
-		Joystick m_driveStick = new Joystick(1);
-		
-		m_robotDrive.mecanumDrive_Cartesian(m_driveStick.getX(), m_driveStick.getY(), m_driveStick.getZ(), 0);
+
+	public MecDrive(){
+//		SmartDashboard.putBoolean("MecDrive.MecDrive()", true);
+		requires(Robot.driveTrain);
 	}
 	
-
-	// Called just before this Command runs the first time
-	@Override
-	protected void initialize() {
+	protected void initialize(){
+//		SmartDashboard.putBoolean("MecDrive.initialize()", true);
 	}
-
-	// Called repeatedly when this Command is scheduled to run
-	@Override
-	protected void execute() {
+	
+	protected void execute(){
+//		SmartDashboard.putBoolean("MecDrive.execute()", true);
+		Robot.driveTrain.controllerDrive(Robot.oi.driveStick.getRawAxis(0),Robot.oi.driveStick.getRawAxis(3),Robot.oi.driveStick.getRawAxis(1),0);
 	}
-
-	// Make this return true when this Command no longer needs to run execute()
+	
 	@Override
 	protected boolean isFinished() {
+		// TODO Auto-generated method stub
+//		SmartDashboard.putBoolean("MecDrive.isFinished()", true);
 		return false;
 	}
-
-	// Called once after isFinished returns true
-	@Override
-	protected void end() {
+	
+	protected void end(){
+//		SmartDashboard.putBoolean("MecDrive.end()", true);
+		Robot.driveTrain.setDriveMotors(0);
 	}
 
-	// Called when another command which requires one or more of the same
-	// subsystems is scheduled to run
 	@Override
 	protected void interrupted() {
+		// TODO Auto-generated method stub
+//		SmartDashboard.putBoolean("MecDrive.interrupted()", true);
+		end();
 	}
+
 }
