@@ -12,7 +12,7 @@ import org.usfirst.frc.team4750.robot.RobotMap;
  */
 public class AutoMove extends Command {
 	
-	Timer timer = new Timer();
+	Timer timer;
 	double leftSpeed, rightSpeed;
 	double driveTime;
 	
@@ -21,6 +21,7 @@ public class AutoMove extends Command {
 		this.leftSpeed = leftSpeed;
 		this.rightSpeed = rightSpeed;
 		this.driveTime = driveTime;
+		timer = new Timer();
 		
 //		SmartDashboard.putBoolean("AutoMove.AutoMove()", true);
 		
@@ -29,9 +30,7 @@ public class AutoMove extends Command {
 
 	// Called just before this Command runs the first time
 	@Override
-	protected void initialize() {
-		Robot.driveTrain.setLeftDriveMotor(leftSpeed);
-		Robot.driveTrain.setRightDriveMotor(rightSpeed);
+	protected void initialize() {	
 		timer.start();
 		SmartDashboard.getNumber("Timer:", timer.get());
 
@@ -41,6 +40,8 @@ public class AutoMove extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
+		Robot.driveTrain.setLeftDriveMotor(leftSpeed);
+		Robot.driveTrain.setRightDriveMotor(rightSpeed);
 		SmartDashboard.putBoolean("AutoMove.execute()", true);
 	}
 

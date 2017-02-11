@@ -48,9 +48,12 @@ public class Robot extends IterativeRobot {
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		//SmartDashboard.putData("Auto mode", chooser);
 		
+		//Set the mode we're going to run in Autonomous...
+		// Normally we'd read this from the mechanical switch
 		autoMode = AutoMode.MOVE_FORWARD;
 		
 		// (left speed, right speed, time)
+		// Ok, see which position the switch is in
 		switch(autoMode){
 			case MOVE_FORWARD:
 				autonomousCommand = new AutoMove(+1.0, 1.0, RobotMap.REACH_TIME);
