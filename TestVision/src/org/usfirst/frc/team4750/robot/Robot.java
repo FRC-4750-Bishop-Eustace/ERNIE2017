@@ -115,7 +115,7 @@ public class Robot extends IterativeRobot {
 		
 		if(!pipeline.filterContoursOutput().isEmpty()){
 			SmartDashboard.putBoolean("Was non-empty", true);
-			rect = Imgproc.boundingRect(pipeline.filterContoursOutput().get(0));
+			rect = Imgproc.boundingRect(pipeline.bestContourOutput());
 			SmartDashboard.putNumber("Target Position", rect.x + (rect.width/2.0));
 		} else {
 			SmartDashboard.putBoolean("Was empty", true);
