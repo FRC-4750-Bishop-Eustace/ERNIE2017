@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team4750.robot.commands.AutoDriveForwardAndTurn;
 import org.usfirst.frc.team4750.robot.commands.AutoMove;
+import org.usfirst.frc.team4750.robot.commands.TurnToHeading;
 //import org.usfirst.frc.team4750.robot.commands.ExampleCommand;
 import org.usfirst.frc.team4750.robot.subsystems.DriveTrain;
 //import org.usfirst.frc.team4750.robot.subsystems.ExampleSubsystem;
@@ -50,7 +51,7 @@ public class Robot extends IterativeRobot {
 		
 		//Set the mode we're going to run in Autonomous...
 		// Normally we'd read this from the mechanical switch
-		autoMode = AutoMode.MOVE_FORWARD;
+		autoMode = AutoMode.TURN_TO_HEADING;
 		
 		// (left speed, right speed, time)
 		// Ok, see which position the switch is in
@@ -63,7 +64,9 @@ public class Robot extends IterativeRobot {
 			case DRIVE_FORWARD_AND_TURN:
 				autonomousCommand = new AutoDriveForwardAndTurn(+1, RobotMap.REACH_TIME, +1, RobotMap.TURN_TIME);
 				break;
-					
+			case TURN_TO_HEADING:
+				autonomousCommand = new TurnToHeading(90.0f);
+				break;
 		}
 	}
 
