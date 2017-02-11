@@ -1,21 +1,21 @@
-
 package org.usfirst.frc.team4750.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import org.usfirst.frc.team4750.robot.subsystems.Agitator;
-import org.usfirst.frc.team4750.robot.subsystems.AutoSwitch;
+import org.usfirst.frc.team4750.robot.commands.AutoDriveForwardAndTurn;
+import org.usfirst.frc.team4750.robot.commands.AutoMove;
+import org.usfirst.frc.team4750.robot.commands.TurnToHeading;
 //import org.usfirst.frc.team4750.robot.commands.ExampleCommand;
 import org.usfirst.frc.team4750.robot.subsystems.DriveTrain;
-import org.usfirst.frc.team4750.robot.subsystems.Intake;
-import org.usfirst.frc.team4750.robot.subsystems.Lifter;
-import org.usfirst.frc.team4750.robot.subsystems.Shooter;
 //import org.usfirst.frc.team4750.robot.subsystems.ExampleSubsystem;
+
+
+
+
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -27,7 +27,6 @@ import org.usfirst.frc.team4750.robot.subsystems.Shooter;
 public class Robot extends IterativeRobot {
 
 	//this defines the subsystems so they can be called along with their subclasses
-	public static final DriveTrain driveTrain = new DriveTrain();
 	public static final Shooter shooter = new Shooter();
 	public static final Intake intake = new Intake();
 	public static final Agitator agitator = new Agitator();
@@ -40,20 +39,54 @@ public class Robot extends IterativeRobot {
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
 
+	
+	
+	
+	//public static final MecDrive MecDrive = new MecDrive(0, 0);
+	//public static final MecDrive MecDrive = new MecDrive();
+	public static final DriveTrain driveTrain = new DriveTrain(RobotMap.FRONT_LEFT_MOTOR,
+															   RobotMap.BACK_LEFT_MOTOR,
+															   RobotMap.FRONT_RIGHT_MOTOR,
+															   RobotMap.BACK_RIGHT_MOTOR);
+	
+	//public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
+	public static OI oi;
+
+	AutoMode autoMode;
+	
+	//SendableChooser<Command> chooser = new SendableChooser<>();
+	
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
 	 */
 	@Override
 	public void robotInit() {
+
 		oi = new OI();
-		
-		
-		//Read the values of the 3 pins
-		
 		//chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
-		SmartDashboard.putData("Auto mode", chooser);
+		//SmartDashboard.putData("Auto mode", chooser);
+		
+		//Set the mode we're going to run in Autonomous...
+		// Normally we'd read this from the mechanical switch
+		autoMode = AutoMode.TURN_TO_HEADING;
+		
+		// (left speed, right speed, time)
+		// Ok, see which position the switch is in
+		switch(autoMode){
+			case MOVE_FORWARD:
+				autonomousCommand = new AutoMove(+1.0, 1.0, RobotMap.REACH_TIME);
+				break;
+				
+		// (driveSpeed, driveTime, turnSpeed, turnTime)
+			case DRIVE_FORWARD_AND_TURN:
+				autonomousCommand = new AutoDriveForwardAndTurn(+1, RobotMap.REACH_TIME, +1, RobotMap.TURN_TIME);
+				break;
+			case TURN_TO_HEADING:
+				autonomousCommand = new TurnToHeading(90.0f);
+				break;
+		}
 	}
 
 	/**
@@ -84,11 +117,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		
-		// read the command to run from the switch.
-		autonomousCommand = autoswitch.getMode();
-		
-		autonomousCommand = chooser.getSelected();
+		//autonomousCommand = chooser.getSelected();
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
@@ -98,8 +127,17 @@ public class Robot extends IterativeRobot {
 		 */
 
 		// schedule the autonomous command (example)
+		
+		SmartDashboard.putBoolean("Robot.autonomousInit()",true);
 		if (autonomousCommand != null)
 			autonomousCommand.start();
+		
+		
+		// read the command to run from the switch.
+		autonomousCommand = autoswitch.getMode();
+		
+		autonomousCommand = chooser.getSelected();
+
 	}
 
 	/**
@@ -107,11 +145,13 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousPeriodic() {
+		SmartDashboard.putBoolean("Robot.autonomousPeriodic()",true);
 		Scheduler.getInstance().run();
 	}
 
 	@Override
 	public void teleopInit() {
+
 		// This makes sure that the autonomous stops running when
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove

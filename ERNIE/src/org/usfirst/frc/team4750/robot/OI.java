@@ -1,5 +1,6 @@
 package org.usfirst.frc.team4750.robot;
 
+<<<<<<< HEAD
 import org.usfirst.frc.team4750.robot.commands.Lifting;
 import org.usfirst.frc.team4750.robot.commands.SetIntakeSpeed;
 import org.usfirst.frc.team4750.robot.commands.SetShooterSpeed;

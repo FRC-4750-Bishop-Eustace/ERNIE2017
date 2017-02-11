@@ -7,6 +7,7 @@ package org.usfirst.frc.team4750.robot;
  * floating around.
  */
 public class RobotMap {
+<<<<<<< HEAD
 	//Joystick ports(USB) Check the driver station
 	public static int DRIVE_STICK_USB_PORT = 0;
 	
@@ -39,9 +40,12 @@ public class RobotMap {
 	// public static int rangefinderPort = 1;
 	// public static int rangefinderModule = 1;
 	
-	
-	
 	public static final int SELECTOR_HIGH_DIO = 1;  // (On switch, closest to the middle)
 	public static final int SELECTOR_MID_DIO =2; // (on switch, between edge and middle)
 	public static final int SELECTOR_LOW_DIO = 3; // (on switch, edge)
+
+	//Timers
+	public static final double REACH_TIME = 5;
+	public static final double TURN_TIME = 10;
+
 }
