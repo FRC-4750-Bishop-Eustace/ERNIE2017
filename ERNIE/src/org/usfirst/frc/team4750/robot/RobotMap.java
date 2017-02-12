@@ -7,7 +7,6 @@ package org.usfirst.frc.team4750.robot;
  * floating around.
  */
 public class RobotMap {
-<<<<<<< HEAD
 	//Joystick ports(USB) Check the driver station
 	public static int DRIVE_STICK_USB_PORT = 0;
 	
