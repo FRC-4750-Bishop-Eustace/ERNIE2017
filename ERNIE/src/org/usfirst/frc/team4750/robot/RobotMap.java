@@ -27,6 +27,9 @@ public class RobotMap {
 	public static final double INTAKE_MOTOR_SPEED = -.5;
 	public static final double LIFTER_MOTOR_SPEED = .2;
 	public static final double AGITATOR_MOTOR_SPEED = .4;
+	
+	//Cameras
+	
 
 	
 	// For example to map the left and right motors, you could define the
@@ -46,5 +49,11 @@ public class RobotMap {
 	//Timers
 	public static final double REACH_TIME = 5;
 	public static final double TURN_TIME = 10;
+
+	//Cameras
+	public static final int CAMERA1 = 0;
+	public static final int CAMERA2 = 1;
+	public static final int CAMERA3 = 2;
+	public static final int CURRCAMERA = 3;
 
 }
