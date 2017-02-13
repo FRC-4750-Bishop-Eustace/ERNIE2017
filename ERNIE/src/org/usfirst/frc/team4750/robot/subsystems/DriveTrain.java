@@ -6,6 +6,7 @@ import org.usfirst.frc.team4750.robot.RobotMap;
 import org.usfirst.frc.team4750.robot.commands.MecDrive;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Joystick.AxisType;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.RobotDrive;
@@ -39,17 +40,13 @@ public class DriveTrain extends Subsystem {
 	public void controllerDrive(Joystick i) {
 		//sets up the joystick and which axis controls what
 		robotDrive.mecanumDrive_Cartesian(i.getRawAxis(0), -i.getRawAxis(3), -i.getRawAxis(1), 0);
-	}
-
-	public void controllerDrive(double xDirSpeed, double yDirSpeed, double rotationSpeed, double gyroAngle) {
-		robotDrive.mecanumDrive_Cartesian(xDirSpeed, -yDirSpeed, -rotationSpeed, gyroAngle);    //double x, double y, double rotation, double gyroAngle
-
+		//robotDrive.mecanumDrive_Cartesian(i.getX(), -i.getY(), -i.getTwist(), 0);
 	}
 
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
 		// setDefaultCommand(new MySpecialCommand());
-		//setDefaultCommand(new MecDrive());
+		setDefaultCommand(new MecDrive());
 	}
 	
 	public void setLeftDriveMotor(double speed){

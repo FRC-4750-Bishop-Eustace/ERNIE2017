@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team4750.robot.commands.AutoDriveForwardAndTurn;
 import org.usfirst.frc.team4750.robot.commands.AutoMove;
+import org.usfirst.frc.team4750.robot.commands.MecDrive;
 import org.usfirst.frc.team4750.robot.commands.TurnToHeading;
 import org.usfirst.frc.team4750.robot.subsystems.Agitator;
 import org.usfirst.frc.team4750.robot.subsystems.AutoSwitch;
@@ -32,6 +33,12 @@ import org.usfirst.frc.team4750.robot.subsystems.Shooter;
  */
 public class Robot extends IterativeRobot {
 
+	public static final DriveTrain driveTrain = new DriveTrain(
+			RobotMap.FRONT_LEFT_MOTOR,
+			   RobotMap.BACK_LEFT_MOTOR,
+			   RobotMap.FRONT_RIGHT_MOTOR,
+			   RobotMap.BACK_RIGHT_MOTOR);
+
 	//this defines the subsystems so they can be called along with their subclasses
 	public static final Shooter shooter = new Shooter();
 	public static final Intake intake = new Intake();
@@ -45,15 +52,6 @@ public class Robot extends IterativeRobot {
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
 
-	
-	
-	
-	//public static final MecDrive MecDrive = new MecDrive(0, 0);
-	//public static final MecDrive MecDrive = new MecDrive();
-	public static final DriveTrain driveTrain = new DriveTrain(RobotMap.FRONT_LEFT_MOTOR,
-															   RobotMap.BACK_LEFT_MOTOR,
-															   RobotMap.FRONT_RIGHT_MOTOR,
-															   RobotMap.BACK_RIGHT_MOTOR);
 	
 	//public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 
@@ -131,17 +129,17 @@ public class Robot extends IterativeRobot {
 		 * autonomousCommand = new ExampleCommand(); break; }
 		 */
 
+		// read the command to run from the switch.
+		// commenting this out for now so we can test rotating with the IMU
+		
+		//autonomousCommand = autoswitch.getMode();
+				
+		
 		// schedule the autonomous command (example)
 		
 		SmartDashboard.putBoolean("Robot.autonomousInit()",true);
 		if (autonomousCommand != null)
 			autonomousCommand.start();
-		
-		
-		// read the command to run from the switch.
-		autonomousCommand = autoswitch.getMode();
-		
-		autonomousCommand = chooser.getSelected();
 
 	}
 
