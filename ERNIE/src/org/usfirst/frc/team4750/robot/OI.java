@@ -29,7 +29,7 @@ public class OI {
 		//where the commands for the buttons are placed
 		shootButton.whileHeld(new SetShooterSpeed());
 		intakeButton.whenPressed(new SetIntakeSpeed());
-		lifterButton.whileHeld(new Lifting());// will be changed to prob active so we can have the speeds change to help with lifting
+		lifterButton.whileHeld(new Lifting());// will be changed to prob active so we can have the speeds change to help with lifti
 		
 	}
 }

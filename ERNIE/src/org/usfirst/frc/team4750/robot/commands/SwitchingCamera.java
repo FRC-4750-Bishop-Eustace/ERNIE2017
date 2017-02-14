@@ -14,6 +14,7 @@ public class SwitchingCamera extends Command {
 	protected void execute(){
 		if(Robot.oi.cameraButton.get()){
 			Robot.camera.currentState();
+		// NOTE. NEED TO DEBOUNCE THE PRESS!
 		}
 	}
 	
