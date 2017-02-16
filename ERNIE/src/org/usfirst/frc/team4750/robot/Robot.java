@@ -45,8 +45,8 @@ public class Robot extends IterativeRobot {
 	public static final Intake intake = new Intake();
 	public static final Agitator agitator = new Agitator();
 	public static final Lifter lifter = new Lifter();
-	public static final Camera camera = new Camera();
-	
+	public static Camera camera = new Camera();
+
 	//public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static OI oi;
 	public static final AutoSwitch autoswitch = new AutoSwitch();
@@ -122,6 +122,8 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
+		// always start up the cameras
+		camera.init();
 		//autonomousCommand = chooser.getSelected();
 
 		/*
@@ -156,7 +158,12 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void teleopInit() {
-
+		
+		// if we didn't previously initialize (because in testing we skipped the autonomous mode)
+		// go ahead and initialize it now.
+		if(!camera.isInitialized())
+			camera.init();
+		
 		// This makes sure that the autonomous stops running when
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
