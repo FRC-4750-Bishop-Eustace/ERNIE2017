@@ -6,22 +6,21 @@ import org.usfirst.frc.team4750.robot.Robot;
 import org.usfirst.frc.team4750.robot.subsystems.Camera;
 
 public class SwitchingCamera extends Command {
-
+	boolean finished = false;
+	
 	public SwitchingCamera(){
 		requires(Robot.camera);
 	}
 	
 	protected void execute(){
-		if(Robot.oi.cameraButton.get()){
-			Robot.camera.currentState();
-		// NOTE. NEED TO DEBOUNCE THE PRESS!
-		}
+		Robot.camera.cycle();
+		finished = true;
 	}
 	
 	@Override
 	protected boolean isFinished() {
 		// TODO Auto-generated method stub
-		return false;
+		return finished;
 	}
 
 }

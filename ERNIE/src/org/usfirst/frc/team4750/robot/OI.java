@@ -3,7 +3,8 @@ package org.usfirst.frc.team4750.robot;
 import org.usfirst.frc.team4750.robot.commands.Lifting;
 import org.usfirst.frc.team4750.robot.commands.SetIntakeSpeed;
 import org.usfirst.frc.team4750.robot.commands.SetShooterSpeed;
-//import org.usfirst.frc.team4750.robot.commands.Shooting;
+import org.usfirst.frc.team4750.robot.commands.SwitchingCamera;
+
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -30,6 +31,6 @@ public class OI {
 		shootButton.whileHeld(new SetShooterSpeed());
 		intakeButton.toggleWhenPressed(new SetIntakeSpeed());
 		lifterButton.whileHeld(new Lifting());// will be changed to prob active so we can have the speeds change to help with lifti
-		
+		cameraButton.whenReleased(new SwitchingCamera());
 	}
 }
