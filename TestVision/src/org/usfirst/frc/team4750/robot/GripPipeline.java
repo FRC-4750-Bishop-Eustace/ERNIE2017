@@ -68,9 +68,12 @@ public class GripPipeline implements VisionPipeline {
 		double[] filterContoursSolidity = {60.0, 100.0};
 		double filterContoursMaxVertices = 50.0;
 		double filterContoursMinVertices = 0.0;
-		double filterContoursMinRatio = 0.2;
-		double filterContoursMaxRatio = 0.6;
-		filterContours(filterContoursInput, filterContoursMinArea, filterContoursMinPerimeter, filterContoursMinWidth, filterContoursMaxWidth, filterContoursMinHeight, filterContoursMaxHeight, filterContoursSolidity, filterContoursMaxVertices, filterContoursMinVertices, filterContoursMinRatio, filterContoursMaxRatio, filterContoursOutput);
+		double filterContoursMinRatio = 0.1;
+		double filterContoursMaxRatio = 1.0;
+		filterContours(filterContoursInput, filterContoursMinArea, filterContoursMinPerimeter, filterContoursMinWidth,
+				filterContoursMaxWidth, filterContoursMinHeight, filterContoursMaxHeight, filterContoursSolidity,
+				filterContoursMaxVertices, filterContoursMinVertices, filterContoursMinRatio, filterContoursMaxRatio,
+				filterContoursOutput);
 		
 		// Step score surviving contours
 		ArrayList<MatOfPoint> scoreContoursInput = filterContoursOutput;
