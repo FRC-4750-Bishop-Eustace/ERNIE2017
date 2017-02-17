@@ -4,7 +4,6 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team4750.robot.Robot;
-import org.usfirst.frc.team4750.robot.RobotMap;
 
 /**
  *
@@ -38,7 +37,7 @@ public class MecDrive extends Command {
 	
 	protected void end(){
 //		SmartDashboard.putBoolean("MecDrive.end()", true);
-		Robot.driveTrain.setDriveMotors(0);
+		Robot.driveTrain.setDriveMotors(0, 0);
 	}
 
 	@Override

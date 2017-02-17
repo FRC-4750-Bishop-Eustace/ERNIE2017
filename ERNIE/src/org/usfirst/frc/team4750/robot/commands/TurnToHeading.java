@@ -71,9 +71,9 @@ public class TurnToHeading extends Command {
 			targetheading = 360+targetheading;
 		if(targetheading > 360)
 			targetheading = targetheading-360;
-		SmartDashboard.putDouble("TurnToHeading.CurrentHeading", startheading);
-		SmartDashboard.putDouble("TurnToHeading.TargetHeading", targetheading);
-		SmartDashboard.putDouble("TurnToHeading.Offset", offset);
+		SmartDashboard.putNumber("TurnToHeading.CurrentHeading", startheading);
+		SmartDashboard.putNumber("TurnToHeading.TargetHeading", targetheading);
+		SmartDashboard.putNumber("TurnToHeading.Offset", offset);
 	}
 	
 	// Called repeatedly when this Command is scheduled to run
@@ -127,10 +127,10 @@ public class TurnToHeading extends Command {
 				speed=0.3f;
 		}
 		// now tell it to turn!
-		SmartDashboard.putDouble("TurnToHeading.CurrentHeading", lastheadingread);
-		SmartDashboard.putDouble("TurnToHeading.TargetHeading", targetheading);
-		SmartDashboard.putDouble("TurnToHeading.Offset", offset);
-		SmartDashboard.putDouble("TurnToHeading.Speed", speed);
+		SmartDashboard.putNumber("TurnToHeading.CurrentHeading", lastheadingread);
+		SmartDashboard.putNumber("TurnToHeading.TargetHeading", targetheading);
+		SmartDashboard.putNumber("TurnToHeading.Offset", offset);
+		SmartDashboard.putNumber("TurnToHeading.Speed", speed);
 		//System.out.println("TargetHeading:"+targetheading+"  Currentheading:"+lastheadingread+"   Offset:"+offset+"  Speed:"+speed);
 		Robot.driveTrain.setDriveMotors(speed, -1.0*speed);
 	}

@@ -16,9 +16,9 @@ public class Agitator extends Subsystem {
 
 	}
 	
-	public void setAgitatorSpeed(){
+	public void setAgitatorSpeed(double speed){
 		//sets speed of motor based on RobotMap
-		agitatorMotor.set(RobotMap.AGITATOR_MOTOR_SPEED);
+		agitatorMotor.set(speed);
 	}
 
 }

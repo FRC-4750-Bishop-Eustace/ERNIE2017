@@ -2,8 +2,6 @@ package org.usfirst.frc.team4750.robot.subsystems;
 
 import org.opencv.core.Mat;
 import org.usfirst.frc.team4750.robot.RobotMap;
-import org.usfirst.frc.team4750.robot.OI;
-import org.usfirst.frc.team4750.robot.Robot;
 
 import edu.wpi.cscore.CvSink;
 import edu.wpi.cscore.CvSource;
@@ -50,7 +48,7 @@ public class Camera extends Subsystem  {
 		//setting up FPS and Resolution
 		camera1.setVideoMode(PixelFormat.kMJPEG, 160,120,10); // plug this one into the RoboRio, other one into the Hub.
 	    
-	    camera2.setVideoMode(PixelFormat.kMJPEG, 320,240,15); // THIS IS THE LOGITECH CAMERA!!! USE FOR VISION!
+	    camera2.setVideoMode(PixelFormat.kMJPEG, 320,240,15); // THIS IS THE LOGITECH CAMERA!!! USE FOR VISION! THIS GOES IN HUB!
 	    
 	    
 	    // Ok, now we need to set up the thread that Streams the video

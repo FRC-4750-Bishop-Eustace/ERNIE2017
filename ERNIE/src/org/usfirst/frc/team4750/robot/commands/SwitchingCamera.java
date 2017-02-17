@@ -3,7 +3,6 @@ package org.usfirst.frc.team4750.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 
 import org.usfirst.frc.team4750.robot.Robot;
-import org.usfirst.frc.team4750.robot.subsystems.Camera;
 
 public class SwitchingCamera extends Command {
 	boolean finished = false;

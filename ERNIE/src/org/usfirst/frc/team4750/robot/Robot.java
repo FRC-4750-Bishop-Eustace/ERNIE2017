@@ -9,21 +9,14 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team4750.robot.commands.AutoDriveForwardAndTurn;
 import org.usfirst.frc.team4750.robot.commands.AutoMove;
-import org.usfirst.frc.team4750.robot.commands.MecDrive;
 import org.usfirst.frc.team4750.robot.commands.TurnToHeading;
 import org.usfirst.frc.team4750.robot.subsystems.Agitator;
 import org.usfirst.frc.team4750.robot.subsystems.AutoSwitch;
 import org.usfirst.frc.team4750.robot.subsystems.Camera;
-//import org.usfirst.frc.team4750.robot.commands.ExampleCommand;
 import org.usfirst.frc.team4750.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team4750.robot.subsystems.Intake;
 import org.usfirst.frc.team4750.robot.subsystems.Lifter;
-//import org.usfirst.frc.team4750.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team4750.robot.subsystems.Shooter;
-
-
-
-
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -35,7 +28,7 @@ import org.usfirst.frc.team4750.robot.subsystems.Shooter;
 public class Robot extends IterativeRobot {
 
 	public static final DriveTrain driveTrain = new DriveTrain(
-			RobotMap.FRONT_LEFT_MOTOR,
+			   RobotMap.FRONT_LEFT_MOTOR,
 			   RobotMap.BACK_LEFT_MOTOR,
 			   RobotMap.FRONT_RIGHT_MOTOR,
 			   RobotMap.BACK_RIGHT_MOTOR);
@@ -45,9 +38,8 @@ public class Robot extends IterativeRobot {
 	public static final Intake intake = new Intake();
 	public static final Agitator agitator = new Agitator();
 	public static final Lifter lifter = new Lifter();
-	public static Camera camera = new Camera();
+	public static final Camera camera = new Camera();
 
-	//public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static OI oi;
 	public static final AutoSwitch autoswitch = new AutoSwitch();
 
@@ -55,11 +47,7 @@ public class Robot extends IterativeRobot {
 	SendableChooser<Command> chooser = new SendableChooser<>();
 
 	
-	//public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
-
 	AutoMode autoMode;
-	
-	//SendableChooser<Command> chooser = new SendableChooser<>();
 	
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -69,7 +57,7 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		oi = new OI();
 		
-		//chooser.addDefault("Default Auto", new ExampleCommand());
+		//chooser.addDefault("Default Auto", new TurnToHeading(0));
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		//SmartDashboard.putData("Auto mode", chooser);
 		
@@ -171,7 +159,6 @@ public class Robot extends IterativeRobot {
 		// this line or comment it out.
 		if (autonomousCommand != null)autonomousCommand.cancel();
 		// this makes it so the agitator starts running when the robot comes on
-		Robot.agitator.setAgitatorSpeed();
 	}
 
 	/**

@@ -5,7 +5,6 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team4750.robot.Robot;
-import org.usfirst.frc.team4750.robot.RobotMap;
 
 /**
  *
@@ -60,7 +59,7 @@ public class AutoMove extends Command {
 	@Override
 	protected void end() {
 		SmartDashboard.putBoolean("AutoMove.end()", true);
-		Robot.driveTrain.setDriveMotors(0);
+		Robot.driveTrain.setDriveMotors(0 , 0);
 		timer.stop();
 	}
 

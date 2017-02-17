@@ -3,8 +3,6 @@
  */
 package org.usfirst.frc.team4750.robot.subsystems;
 
-import java.util.Arrays;
-
 import org.usfirst.frc.team4750.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.DigitalInput;
