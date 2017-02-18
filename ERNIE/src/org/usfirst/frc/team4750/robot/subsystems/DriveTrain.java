@@ -1,6 +1,8 @@
 package org.usfirst.frc.team4750.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+
+import org.usfirst.frc.team4750.robot.Robot;
 import org.usfirst.frc.team4750.robot.commands.MecDrive;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -34,7 +36,8 @@ public class DriveTrain extends Subsystem {
 	
 	public void controllerDrive(Joystick i) {
 		//sets up the joystick and which axis controls what. (x,y,rotation,gyro)
-		robotDrive.mecanumDrive_Cartesian(i.getX(), i.getY(), i.getThrottle(), 0);
+		//we pass inputs that are cube so we have better control when we make fine adjustments.
+		robotDrive.mecanumDrive_Cartesian(Robot.oi.driveStickXcube, Robot.oi.driveStickYcube,Robot.oi.driveStickTwistcube, 0);
 	}
 
 	public void initDefaultCommand() {
