@@ -1,6 +1,7 @@
 package org.usfirst.frc.team4750.robot.subsystems;
 
 import org.opencv.core.Mat;
+import org.usfirst.frc.team4750.robot.Robot;
 import org.usfirst.frc.team4750.robot.RobotMap;
 
 import edu.wpi.cscore.CvSink;
@@ -9,6 +10,7 @@ import edu.wpi.cscore.UsbCamera;
 import edu.wpi.cscore.VideoMode.PixelFormat;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Camera extends Subsystem  {
 	//defining cameras
@@ -32,8 +34,8 @@ public class Camera extends Subsystem  {
      * Constructor
      */
 	public Camera(){
-		camera1 = new UsbCamera("USB Camera 1", RobotMap.CAMERA1);
-		camera2 = new UsbCamera("USB Camera 2", RobotMap.CAMERA2);
+		camera1 = new UsbCamera("USB Camera 1", RobotMap.CAMERA2);
+		camera2 = new UsbCamera("USB Camera 2", RobotMap.CAMERA1);
 		
 		// start out with camera1 (which is the one used for CV anyhow
 		currcamera = camera1;
@@ -46,9 +48,9 @@ public class Camera extends Subsystem  {
 	 */
 	public void init() {
 		//setting up FPS and Resolution
-		camera1.setVideoMode(PixelFormat.kMJPEG, 160,120,10); // plug this one into the RoboRio, other one into the Hub.
+		camera2.setVideoMode(PixelFormat.kMJPEG, 160,120,10); // plug this one into the RoboRio, other one into the Hub.
 	    
-	    camera2.setVideoMode(PixelFormat.kMJPEG, 320,240,15); // THIS IS THE LOGITECH CAMERA!!! USE FOR VISION! THIS GOES IN HUB!
+	    camera1.setVideoMode(PixelFormat.kMJPEG, 320,240,15); // THIS IS THE LOGITECH CAMERA!!! USE FOR VISION! THIS GOES IN HUB!
 	    
 	    
 	    // Ok, now we need to set up the thread that Streams the video
@@ -84,6 +86,14 @@ public class Camera extends Subsystem  {
 			currcamera = camera2;
 		}
 		videothread.switchCam();
+		
+		
+		// cycle the camera position (out of 4 stages) to change the drive angle
+		// we will also need to do switching of the servos for the camera modes.
+		Robot.cameraposition++;
+		if(Robot.cameraposition==4) 
+			Robot.cameraposition=0;
+		SmartDashboard.putInt("CameraDirection", Robot.cameraposition*-90);
 	}
 	
 	@Override

@@ -2,6 +2,7 @@ package org.usfirst.frc.team4750.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 
+import org.usfirst.frc.team4750.robot.OurRobotDrive;
 import org.usfirst.frc.team4750.robot.Robot;
 import org.usfirst.frc.team4750.robot.commands.MecDrive;
 
@@ -29,15 +30,15 @@ public class DriveTrain extends Subsystem {
 		f_rightMotor = new VictorSP(frontRightMotorPort);
 		b_rightMotor = new VictorSP(backRightMotorPort);
 		
-		//sets up the where the robot calls each motor.
-		robotDrive = new RobotDrive(f_leftMotor, b_leftMotor, f_rightMotor, b_rightMotor);
+		//sets up the where the robot calls each motor, with ramped joystick input
+		robotDrive = new OurRobotDrive(f_leftMotor, b_leftMotor, f_rightMotor, b_rightMotor);
 	}
 	
 	
 	public void controllerDrive(Joystick i) {
 		//sets up the joystick and which axis controls what. (x,y,rotation,gyro)
 		//we pass inputs that are cube so we have better control when we make fine adjustments.
-		robotDrive.mecanumDrive_Cartesian(Robot.oi.driveStickXcube, Robot.oi.driveStickYcube,Robot.oi.driveStickTwistcube, 0);
+		robotDrive.mecanumDrive_Cartesian(i.getX(), i.getY(),i.getThrottle(), Robot.cameraposition*-90);
 	}
 
 	public void initDefaultCommand() {

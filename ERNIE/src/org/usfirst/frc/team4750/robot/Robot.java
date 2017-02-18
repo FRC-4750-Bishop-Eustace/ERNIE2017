@@ -46,6 +46,7 @@ public class Robot extends IterativeRobot {
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
 
+	public static int cameraposition = 0;
 	
 	AutoMode autoMode;
 	
