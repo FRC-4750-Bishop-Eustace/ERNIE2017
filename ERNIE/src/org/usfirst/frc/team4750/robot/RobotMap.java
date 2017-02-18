@@ -42,5 +42,12 @@ public class RobotMap {
 	public static final int CAMERA2 = 1;
 	public static final int CAMERA3 = 2;
 	public static final int CURRCAMERA = 3;
+	
+	//Analog Sensors
+	public static final int GEAR_SENSOR = 0;
+	public static final int RANGE_SENSOR = 1;
+	
+	//Digital Sensors
+	public static final int PEG_SENSOR = 0;
 
 }

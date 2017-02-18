@@ -17,6 +17,9 @@ import org.usfirst.frc.team4750.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team4750.robot.subsystems.Intake;
 import org.usfirst.frc.team4750.robot.subsystems.Lifter;
 import org.usfirst.frc.team4750.robot.subsystems.Shooter;
+import org.usfirst.frc.team4750.robot.subsystems.GearDetector;
+import org.usfirst.frc.team4750.robot.subsystems.PegDetector;
+import org.usfirst.frc.team4750.robot.subsystems.RangeDetector;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -39,6 +42,9 @@ public class Robot extends IterativeRobot {
 	public static final Agitator agitator = new Agitator();
 	public static final Lifter lifter = new Lifter();
 	public static final Camera camera = new Camera();
+	public static final GearDetector gear = new GearDetector();
+	public static final PegDetector peg = new PegDetector();
+	public static final RangeDetector range = new RangeDetector();
 
 	public static OI oi;
 	public static final AutoSwitch autoswitch = new AutoSwitch();
@@ -168,6 +174,9 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		Robot.gear.Output();
+		Robot.range.Output();
+		Robot.peg.Output();
 	}
 
 	/**
