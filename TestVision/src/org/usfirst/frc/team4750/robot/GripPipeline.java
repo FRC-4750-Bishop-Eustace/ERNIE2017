@@ -59,8 +59,13 @@ public class GripPipeline implements VisionPipeline {
 
 		// Step Filter_Contours0:
 		ArrayList<MatOfPoint> filterContoursInput = findContoursOutput;
+		
+		//Should we add limiters for the maximum area and perimeter as well?
+		
 		double filterContoursMinArea = 10.0;
+		// double filterContoursMaxArea = 100000.0
 		double filterContoursMinPerimeter = 0.0;
+		// double filterContoursMaxPerimeter = 1400.0
 		double filterContoursMinWidth = 0.0;
 		double filterContoursMaxWidth = 200.0;
 		double filterContoursMinHeight = 0.0;
@@ -143,8 +148,7 @@ public class GripPipeline implements VisionPipeline {
 	 * @param interpolation The type of interpolation.
 	 * @param output The image in which to store the output.
 	 */
-	private void resizeImage(Mat input, double width, double height,
-		int interpolation, Mat output) {
+	private void resizeImage(Mat input, double width, double height, int interpolation, Mat output) {
 		Imgproc.resize(input, output, new Size(width, height), 0.0, 0.0, interpolation);
 	}
 
@@ -157,8 +161,7 @@ public class GripPipeline implements VisionPipeline {
 	 * @param lum The min and max luminance
 	 * @param output The image in which to store the output.
 	 */
-	private void hslThreshold(Mat input, double[] hue, double[] sat, double[] lum,
-		Mat out) {
+	private void hslThreshold(Mat input, double[] hue, double[] sat, double[] lum, Mat out) {
 		Imgproc.cvtColor(input, out, Imgproc.COLOR_BGR2HLS);
 		Core.inRange(out, new Scalar(hue[0], lum[0], sat[0]),
 			new Scalar(hue[1], lum[1], sat[1]), out);
@@ -169,8 +172,7 @@ public class GripPipeline implements VisionPipeline {
 	 * Choices are BOX, GAUSSIAN, MEDIAN, and BILATERAL
 	 */
 	enum BlurType{
-		BOX("Box Blur"), GAUSSIAN("Gaussian Blur"), MEDIAN("Median Filter"),
-			BILATERAL("Bilateral Filter");
+		BOX("Box Blur"), GAUSSIAN("Gaussian Blur"), MEDIAN("Median Filter"), BILATERAL("Bilateral Filter");
 
 		private final String label;
 
@@ -183,7 +185,7 @@ public class GripPipeline implements VisionPipeline {
 				return BILATERAL;
 			}
 			else if (GAUSSIAN.label.equals(type)) {
-			return GAUSSIAN;
+				return GAUSSIAN;
 			}
 			else if (MEDIAN.label.equals(type)) {
 				return MEDIAN;
@@ -206,8 +208,7 @@ public class GripPipeline implements VisionPipeline {
 	 * @param doubleRadius The radius for the blur.
 	 * @param output The image in which to store the output.
 	 */
-	private void blur(Mat input, BlurType type, double doubleRadius,
-		Mat output) {
+	private void blur(Mat input, BlurType type, double doubleRadius, Mat output) {
 		int radius = (int)(doubleRadius + 0.5);
 		int kernelSize;
 		switch(type){
@@ -236,8 +237,7 @@ public class GripPipeline implements VisionPipeline {
 	 * @param maskSize the size of the mask.
 	 * @param output The image in which to store the output.
 	 */
-	private void findContours(Mat input, boolean externalOnly,
-		List<MatOfPoint> contours) {
+	private void findContours(Mat input, boolean externalOnly, List<MatOfPoint> contours) {
 		Mat hierarchy = new Mat();
 		contours.clear();
 		int mode;
@@ -268,10 +268,9 @@ public class GripPipeline implements VisionPipeline {
 	 * @param minRatio minimum ratio of width to height
 	 * @param maxRatio maximum ratio of width to height
 	 */
-	private void filterContours(List<MatOfPoint> inputContours, double minArea,
-		double minPerimeter, double minWidth, double maxWidth, double minHeight, double
-		maxHeight, double[] solidity, double maxVertexCount, double minVertexCount, double
-		minRatio, double maxRatio, List<MatOfPoint> output) {
+	private void filterContours(List<MatOfPoint> inputContours, double minArea, double minPerimeter, double minWidth,
+			double maxWidth, double minHeight, double maxHeight, double[] solidity,	double maxVertexCount,
+			double minVertexCount, double minRatio, double maxRatio, List<MatOfPoint> output) {
 		final MatOfInt hull = new MatOfInt();
 		output.clear();
 		//operation
