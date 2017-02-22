@@ -20,6 +20,7 @@ import org.usfirst.frc.team4750.robot.subsystems.Shooter;
 import org.usfirst.frc.team4750.robot.subsystems.GearDetector;
 import org.usfirst.frc.team4750.robot.subsystems.PegDetector;
 import org.usfirst.frc.team4750.robot.subsystems.RangeDetector;
+import org.usfirst.frc.team4750.robot.subsystems.RelaySwitch;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -45,6 +46,7 @@ public class Robot extends IterativeRobot {
 	public static final GearDetector gear = new GearDetector();
 	public static final PegDetector peg = new PegDetector();
 	public static final RangeDetector range = new RangeDetector();
+	public static final RelaySwitch relay = new RelaySwitch();
 
 	public static OI oi;
 	public static final AutoSwitch autoswitch = new AutoSwitch();

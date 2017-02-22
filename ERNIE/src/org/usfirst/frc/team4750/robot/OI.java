@@ -1,6 +1,7 @@
 package org.usfirst.frc.team4750.robot;
 
 import org.usfirst.frc.team4750.robot.commands.Lifting;
+import org.usfirst.frc.team4750.robot.commands.Relay;
 import org.usfirst.frc.team4750.robot.commands.SetIntakeSpeed;
 import org.usfirst.frc.team4750.robot.commands.SetShooterSpeed;
 import org.usfirst.frc.team4750.robot.commands.SwitchingCamera;
@@ -25,6 +26,7 @@ public class OI {
 	Button intakeButton = new JoystickButton(driveStick, 2);
 	Button lifterButton = new JoystickButton(driveStick, 3);
 	Button cameraButton = new JoystickButton(driveStick, 4);
+	Button relayButton= new JoystickButton(driveStick, 5);
 		
 	public OI(){		
 		//where the commands for the buttons are placed
@@ -32,5 +34,6 @@ public class OI {
 		intakeButton.toggleWhenPressed(new SetIntakeSpeed());
 		lifterButton.whileHeld(new Lifting());
 		cameraButton.whenReleased(new SwitchingCamera());
+		relayButton.whenPressed(new Relay());
 	}
 }
