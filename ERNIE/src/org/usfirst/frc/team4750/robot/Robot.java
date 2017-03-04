@@ -74,21 +74,21 @@ public class Robot extends IterativeRobot {
 		
 		//Set the mode we're going to run in Autonomous...
 		// Normally we'd read this from the mechanical switch
-		autoMode = AutoMode.TURN_TO_HEADING;
+		autoMode = Robot.autoswitch.getMode();
 		
 		// (left speed, right speed, time)
 		// Ok, see which position the switch is in
 		switch(autoMode){
 			case MOVE_FORWARD:
-				autonomousCommand = new AutoMove(+1.0, 1.0, RobotMap.REACH_TIME);
+				autonomousCommand = new AutoMove(+.3, -.3, 2.6, false);
 				break;
 				
 		// (driveSpeed, driveTime, turnSpeed, turnTime)
-			case DRIVE_FORWARD_AND_TURN:
-				autonomousCommand = new AutoDriveForwardAndTurn(+1, RobotMap.REACH_TIME, +1, RobotMap.TURN_TIME);
+			case DRIVE_FORWARD_AND_TURN_LEFT:
+				autonomousCommand = new AutoDriveForwardAndTurn(.5, 2.0, -45.0f, Robot.peg.Output());
 				break;
-			case TURN_TO_HEADING:
-				autonomousCommand = new TurnToHeading(90.0f);
+			case DRIVE_FORWARD_AND_TURN_RIGHT:
+				autonomousCommand = new AutoDriveForwardAndTurn(.5, 2.0, 45.0f, Robot.peg.Output());
 				break;
 		}
 	}
@@ -169,6 +169,7 @@ public class Robot extends IterativeRobot {
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
 		if (autonomousCommand != null)autonomousCommand.cancel();
+		Robot.peglight.setLight(false);
 		// this makes it so the agitator starts running when the robot comes on
 	}
 

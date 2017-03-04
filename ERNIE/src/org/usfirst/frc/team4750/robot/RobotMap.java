@@ -49,6 +49,7 @@ public class RobotMap {
 	
 	//Digital Sensors
 	public static final int PEG_SENSOR = 0;
+	public static final int SECOND_PEG_SENSOR = 1;
 	
 	//Digital Output
 	public static final int PEG_STATUS_LIGHT = 4; 

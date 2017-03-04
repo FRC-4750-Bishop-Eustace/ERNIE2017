@@ -3,6 +3,7 @@
  */
 package org.usfirst.frc.team4750.robot.subsystems;
 
+import org.usfirst.frc.team4750.robot.AutoMode;
 import org.usfirst.frc.team4750.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -36,7 +37,7 @@ public class AutoSwitch extends Subsystem {
 
 	}
 	
-	public CommandGroup getMode() {
+	public AutoMode getMode() {
 		
 		/**
 		 * HIGH    MID    LOW     SWITCHPOS
@@ -67,6 +68,20 @@ public class AutoSwitch extends Subsystem {
 		 * Position 4 - Facing center of arena, start at left side, delivery to left gear delivery location, then go to shooting
 	 	 * Position 5 - do nothing
 	 	 */
+		
+		
+		if(switchpos ==1){
+			SmartDashboard.putNumber("AutoSwitch.Position", switchpos);
+			return AutoMode.MOVE_FORWARD;
+		}else if(switchpos == 2){
+			SmartDashboard.putNumber("AutoSwitch.Position", switchpos);
+			return AutoMode.DRIVE_FORWARD_AND_TURN_RIGHT;
+		}else if(switchpos == 3){
+			SmartDashboard.putNumber("AutoSwitch.Position", switchpos);
+			return AutoMode.DRIVE_FORWARD_AND_TURN_LEFT;
+		}
+		
+		
 		
 		SmartDashboard.putBoolean("AutoSwitch.High",highval);
 		SmartDashboard.putBoolean("AutoSwitch.Mid",midval);

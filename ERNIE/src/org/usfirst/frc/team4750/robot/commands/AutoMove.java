@@ -12,14 +12,15 @@ import org.usfirst.frc.team4750.robot.Robot;
 public class AutoMove extends Command {
 	
 	Timer timer;
-	double leftSpeed, rightSpeed;
-	double driveTime;
+	double leftSpeed, rightSpeed, driveTime;
+	boolean peg;
 	
-	public AutoMove(double leftSpeed, double rightSpeed, double driveTime) {
+	public AutoMove(double leftSpeed, double rightSpeed, double driveTime, boolean peg) {
 		requires(Robot.driveTrain);
 		this.leftSpeed = leftSpeed;
 		this.rightSpeed = rightSpeed;
 		this.driveTime = driveTime;
+		this.peg = peg;
 		timer = new Timer();
 		
 //		SmartDashboard.putBoolean("AutoMove.AutoMove()", true);
@@ -42,15 +43,20 @@ public class AutoMove extends Command {
 		Robot.driveTrain.setLeftDriveMotor(leftSpeed);
 		Robot.driveTrain.setRightDriveMotor(rightSpeed);
 		SmartDashboard.putBoolean("AutoMove.execute()", true);
-	}
+		peg = Robot.peg.Output();
+		}
 
 	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	protected boolean isFinished() {
 		SmartDashboard.putBoolean("AutoMove.isFinished()", true);
-		if(timer.get() > driveTime) {
+		if(timer.get() > driveTime && Robot.peg.Output() == true) {
+			Robot.peglight.setLight(true);
 			return true;
-		} else {
+		}else if(Robot.gear.Output() == true){
+			Robot.peglight.setLight(false);
+			return true;
+		}else{
 			return false;
 		}
 	}
