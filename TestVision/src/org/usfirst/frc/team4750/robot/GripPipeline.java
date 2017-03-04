@@ -22,7 +22,8 @@ public class GripPipeline implements VisionPipeline {
 	private ArrayList<MatOfPoint> findContoursOutput = new ArrayList<MatOfPoint>();
 	private ArrayList<MatOfPoint> filterContoursOutput = new ArrayList<MatOfPoint>();
 	private double[] scoreContoursOutput = new double[50];
-	private MatOfPoint bestContourOutput = new MatOfPoint();
+	private MatOfPoint findBestContourOutput = new MatOfPoint();
+	private double[] ratioContoursOutput = new double[50];
 	
 	static {
 		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
@@ -41,9 +42,9 @@ public class GripPipeline implements VisionPipeline {
 		
 		// Step HSL_Threshold0:
 		Mat hslThresholdInput = resizeImageOutput;
-		double[] hslThresholdHue = {29.0, 54.0};		//{43,46}
-		double[] hslThresholdSaturation = {45.0,80.0};		//{61,68}
-		double[] hslThresholdLuminance = {230.0, 255.0};		//{246,255}
+		double[] hslThresholdHue = {45, 145};		//{43,46}
+		double[] hslThresholdSaturation = {15.0,80.0};		//{61,68}
+		double[] hslThresholdLuminance = {165.0, 255.0};		//{246,255}
 		hslThreshold(hslThresholdInput, hslThresholdHue, hslThresholdSaturation, hslThresholdLuminance, hslThresholdOutput);
 
 		// Step Blur0:
@@ -66,12 +67,12 @@ public class GripPipeline implements VisionPipeline {
 		// double filterContoursMaxArea = 100000.0
 		double filterContoursMinPerimeter = 0.0;
 		// double filterContoursMaxPerimeter = 1400.0
-		double filterContoursMinWidth = 0.0;
-		double filterContoursMaxWidth = 200.0;
+		double filterContoursMinWidth = 10.0;
+		double filterContoursMaxWidth = 1000.0;
 		double filterContoursMinHeight = 0.0;
-		double filterContoursMaxHeight = 500.0;
-		double[] filterContoursSolidity = {60.0, 100.0};
-		double filterContoursMaxVertices = 50.0;
+		double filterContoursMaxHeight = 1000.0;
+		double[] filterContoursSolidity = {0, 100.0};
+		double filterContoursMaxVertices = 100.0;
 		double filterContoursMinVertices = 0.0;
 		double filterContoursMinRatio = 0.1;
 		double filterContoursMaxRatio = 1.0;
@@ -82,12 +83,12 @@ public class GripPipeline implements VisionPipeline {
 		
 		// Step score surviving contours
 		ArrayList<MatOfPoint> scoreContoursInput = filterContoursOutput;
-		double targetRatio = 0.275;
-		scoreContours(scoreContoursInput, targetRatio, scoreContoursOutput);
+		double targetRatio = 0.280;
+		scoreContours(scoreContoursInput, targetRatio);
 		
 		//Step find best scoring contour
 		ArrayList<MatOfPoint> findBestContourInput = filterContoursOutput;
-		findBestContour(findBestContourInput, scoreContoursOutput, bestContourOutput);
+		findBestContour(findBestContourInput, scoreContoursOutput);
 	}
 	
 	
@@ -136,8 +137,12 @@ public class GripPipeline implements VisionPipeline {
 		return scoreContoursOutput;
 	}
 
-	public MatOfPoint bestContourOutput(){
-		return bestContourOutput;
+	public MatOfPoint findBestContourOutput(){
+		return findBestContourOutput;
+	}
+	
+	public double[] ratioContoursOutput(){
+		return ratioContoursOutput;
 	}
 	
 	/**
@@ -299,20 +304,22 @@ public class GripPipeline implements VisionPipeline {
 		}
 	}
 
-	private void scoreContours(List<MatOfPoint> inputContours, double targetRatio, double[] output){
+	private void scoreContours(ArrayList<MatOfPoint> inputContours, double targetRatio){
 		Rect contour;
 		double ratio;
 		for(int i = 0; i <= inputContours.size() - 1; i++){ 
 			contour = Imgproc.boundingRect(inputContours.get(i));
 			ratio = contour.width / contour.height;
+			ratioContoursOutput[i] = ratio;
 			if(ratio <= targetRatio){
-				output[i] = ratio / targetRatio;
+				scoreContoursOutput[i] = ratio / targetRatio;
 			} else { 
-				output[i] = targetRatio / ratio;
+				scoreContoursOutput[i] = targetRatio / ratio;
 			}
 		}
 		for(int i = inputContours.size(); i <= 49; i++){
-			output[i] = 0;
+			scoreContoursOutput[i] = -1;
+			ratioContoursOutput[i] = -1;
 		}
 	}
 	
@@ -327,7 +334,7 @@ public class GripPipeline implements VisionPipeline {
 		return score;
 	}
 	
-	private void findBestContour(ArrayList<MatOfPoint> inputContours, double[] scores, MatOfPoint output){
+	private void findBestContour(ArrayList<MatOfPoint> inputContours, double[] scores){
 		MatOfPoint currentBestContour = new MatOfPoint();
 		double currentHighScore = 0;
 		for(int i = 0; i <= inputContours.size() - 1; i++){
@@ -336,7 +343,7 @@ public class GripPipeline implements VisionPipeline {
 				currentHighScore = scoreOfContour(inputContours,scores,inputContours.get(i));
 			}
 		}
-		output = currentBestContour;
+		findBestContourOutput = currentBestContour;
 	}
 
 }

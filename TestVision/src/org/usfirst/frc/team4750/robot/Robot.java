@@ -1,20 +1,17 @@
 package org.usfirst.frc.team4750.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import java.util.Arrays;
 
 import org.opencv.core.Mat;
+import org.opencv.core.MatOfPoint;
 import org.opencv.core.Rect;
 import org.opencv.imgproc.Imgproc;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
-import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.RobotDrive;
-import edu.wpi.first.wpilibj.vision.VisionRunner;
-import edu.wpi.first.wpilibj.vision.VisionThread;
 import edu.wpi.cscore.CvSink;
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -24,6 +21,8 @@ import edu.wpi.cscore.CvSink;
  * directory.
  */
 public class Robot extends IterativeRobot {
+	
+	Relay relay = new Relay(1);
 	
 	private static final int IMG_WIDTH = 320;
 	private static final int IMG_HEIGHT = 240;
@@ -41,6 +40,8 @@ public class Robot extends IterativeRobot {
 	
 	@Override
 	public void robotInit() {
+		relay.set(Relay.Value.kForward);
+		
 		camera = CameraServer.getInstance().startAutomaticCapture();
 		camera.setResolution(IMG_WIDTH, IMG_HEIGHT);
 		cvSink = CameraServer.getInstance().getVideo();
@@ -48,6 +49,9 @@ public class Robot extends IterativeRobot {
 		//SmartDashboard.putNumber("Target Position", -1.0);
 		SmartDashboard.putBoolean("Was non-empty", false);
 		SmartDashboard.putBoolean("Was empty", false);
+		SmartDashboard.putNumber("Number of unfiltered contours", -1);
+		SmartDashboard.putNumber("Number of filtered contours", -1);
+		
 
 		
 //		camera.setWhiteBalanceManual(1);
@@ -107,19 +111,31 @@ public class Robot extends IterativeRobot {
 //		//drive.arcadeDrive(-0.6, turn * 0.005);
 		cvSink.grabFrame(mat);
 		pipeline.process(mat);
-		
-		SmartDashboard.putString("Resize Img Output 1x1", Arrays.toString(pipeline.resizeImageOutput().get(1, 1)));
-		SmartDashboard.putString("Max HSL Test", Arrays.toString(pipeline.hslThresholdOutput().get(1, 1)));
+		double[] positions = new double[20];
+		double[] scores = new double[20];
+		double[] ratios = new double[20];
+		MatOfPoint[] contours = new MatOfPoint[20];
+		//SmartDashboard.putString("Resize Img Output 1x1", Arrays.toString(pipeline.resizeImageOutput().get(1, 1)));
+		//SmartDashboard.putString("Max HSL Test", Arrays.toString(pipeline.hslThresholdOutput().get(1, 1)));
 		SmartDashboard.putNumber("Number of unfiltered contours", pipeline.findContoursOutput().size());
 		SmartDashboard.putNumber("Number of filtered contours", pipeline.filterContoursOutput().size());
 		
 		if(!pipeline.filterContoursOutput().isEmpty()){
 			SmartDashboard.putBoolean("Was non-empty", true);
-			rect = Imgproc.boundingRect(pipeline.bestContourOutput());
+			rect = Imgproc.boundingRect(pipeline.findBestContourOutput());
+			pipeline.filterContoursOutput().toArray(contours);
+			for(int i=0; i <= pipeline.filterContoursOutput().size()-1; i++){
+				positions[i] = Imgproc.boundingRect(contours[i]).x + Imgproc.boundingRect(contours[i]).width/2;
+			}
+			scores = pipeline.scoreContoursOutput();
+			ratios = pipeline.ratioContoursOutput();
 			SmartDashboard.putNumber("Target Position", rect.x + (rect.width/2.0));
+			SmartDashboard.putString("All filtered contours' positions:", Arrays.toString(positions));
+			SmartDashboard.putString("All filtered contours' scores:", Arrays.toString(scores));
+			SmartDashboard.putString("All filtered contours' ratios:", Arrays.toString(ratios));
 		} else {
 			SmartDashboard.putBoolean("Was empty", true);
-			SmartDashboard.putNumber("Target Position", -1.0);
+			SmartDashboard.putNumber( "Target Position", -1.0);
 		}
 		
 	}
